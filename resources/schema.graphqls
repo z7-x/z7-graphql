@@ -1,0 +1,14 @@
+directive @dateFormat on FIELD_DEFINITION
+directive @dict on FIELD_DEFINITION
+directive @fileObjectFormat on FIELD_DEFINITION
+
+
+type Query {
+    # 当前版本
+    version: String
+}
+
+scalar Date
+scalar OrderBy
+scalar FileObject
+scalar JSON
