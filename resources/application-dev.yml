@@ -3,8 +3,7 @@ spring:
     name: server
   datasource:
     name: datasource
-    url: jdbc:mysql://192.168.3.14:30112/suty?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
-    #url: jdbc:mysql://127.0.0.1:3306/suty-01?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://api.thuni-h.com:30526/suty?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
     username: root
     password: yV2jJxvNs8BD
     druid:
@@ -12,12 +11,6 @@ spring:
       initialSize: 10
       maxWait: 60000
       minIdle: 1
-  data:
-    mongodb:
-      uri: mongodb://root:yV2jJxvNs8BD@192.168.3.14:31197
-      database: nuwa
-      repositories:
-        type: none
 
 grpc:
   server:

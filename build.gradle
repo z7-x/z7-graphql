@@ -43,19 +43,13 @@ apply plugin: 'com.jfrog.artifactory'
 apply plugin: "jacoco"
 apply plugin: 'com.google.protobuf'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'war'
+apply plugin: 'org.springframework.boot'
 
-//gradle.taskGraph.whenReady {
-//    tasks.each { task ->
-//        if ("suty".equals(project.name)) {
-//            task.enabled = false
-//        } else if (task.name.contains("Proto")) {
-//            if (!["server", "security"].contains(project.name)) {
-//                task.enabled = false
-//            }
-//        }
-//    }
-//}
+jar {
+    manifest {
+        attributes 'Main-Class': 'net.whir.hos.Application'
+    }
+}
 
 idea {
     module {
