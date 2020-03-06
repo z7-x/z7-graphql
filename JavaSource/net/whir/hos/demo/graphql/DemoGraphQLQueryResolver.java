@@ -1,4 +1,4 @@
-package net.whir.hos.congress.graphql;
+package net.whir.hos.demo.graphql;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import org.springframework.stereotype.Component;

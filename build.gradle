@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        maven { url "https://artifactory.homeword.cn/artifactory/libs-release" }
+        maven { url "https://artifactory.thuni-h.com/artifactory/libs-release" }
         maven { url "https://maven.aliyun.com/repository/central" }
         maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
         mavenCentral()
@@ -15,10 +15,11 @@ plugins {
     id "com.jfrog.artifactory" version "4.9.8"
     id "org.zeroturnaround.gradle.jrebel" version "1.1.8"
     id "com.google.protobuf" version "0.8.10"
+    id 'org.springframework.boot' version '2.1.4.RELEASE'
 }
 
 ext {
-    coreVersion = "0.4.16"
+    coreVersion = "0.4.22"
     protobufVersion = "3.8.0"
     grpcVersion = "1.23.0"
     springBootVersion = "2.1.4.RELEASE"
@@ -33,7 +34,7 @@ version = System.getenv()['CI_BUILD_TAG']
 status = 'integration'
 
 repositories {
-    maven { url "https://artifactory.homeword.cn/artifactory/libs-release" }
+    maven { url "https://artifactory.thuni-h.com/artifactory/libs-release" }
 }
 
 apply plugin: 'idea'
@@ -44,17 +45,17 @@ apply plugin: 'com.google.protobuf'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'war'
 
-gradle.taskGraph.whenReady {
-    tasks.each { task ->
-        if ("suty".equals(project.name)) {
-            task.enabled = false
-        } else if (task.name.contains("Proto")) {
-            if (!["server", "security"].contains(project.name)) {
-                task.enabled = false
-            }
-        }
-    }
-}
+//gradle.taskGraph.whenReady {
+//    tasks.each { task ->
+//        if ("suty".equals(project.name)) {
+//            task.enabled = false
+//        } else if (task.name.contains("Proto")) {
+//            if (!["server", "security"].contains(project.name)) {
+//                task.enabled = false
+//            }
+//        }
+//    }
+//}
 
 idea {
     module {
@@ -186,9 +187,9 @@ test {
 sonarqube {
     properties {
         property "sonar.sourceEncoding", "UTF-8"
-        property "sonar.links.ci", "http://gitlab.homeword.cn/ci"
-        property "sonar.links.issue", "http://gitlab.homeword.cn/apis/framework/issues"
-        property "sonar.links.scm", "http://gitlab.homeword.cn/apis/framework.git"
+        property "sonar.links.ci", "http://gitlab.thuni-h.com/ci"
+        property "sonar.links.issue", "http://gitlab.thuni-h.com/apis/framework/issues"
+        property "sonar.links.scm", "http://gitlab.thuni-h.com/apis/framework.git"
     }
 }
 

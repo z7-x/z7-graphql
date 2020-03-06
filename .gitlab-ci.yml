@@ -1,0 +1,68 @@
+stages:
+  - build
+  - test
+  - release
+  - deploy
+
+# 构建镜像
+build:
+  stage: build
+  image: core.harbor.thuni-h.com/limaofeng/java-protoc:v2
+  cache:
+    paths:
+      - .gradle/caches/
+      - .gradle/wrapper/
+  before_script:
+    - export GRADLE_USER_HOME=$PWD/.gradle
+  script:
+    - ./gradlew clean build -x test
+    - mv build/libs/*.jar build/app.jar
+    - mv sql-scripts build/sql-scripts
+  artifacts:
+    paths:
+      - build/app.jar
+      - build/sql-scripts
+
+sonarqube:
+  stage: test
+  image: core.harbor.thuni-h.com/limaofeng/gitlab-sonar-scanner
+  variables:
+    SONAR_ANALYSIS_MODE: publish
+    SONAR_PROJECT_KEY: $CI_PROJECT_NAMESPACE:$CI_PROJECT_NAME
+  script:
+    - gitlab-sonar-scanner
+  cache:
+    paths:
+      - node_modules/
+      - yarn.lock
+  only:
+    - master
+    - tags
+  allow_failure: true
+
+# 构建镜像
+release:
+  stage: release
+  dependencies:
+    - build
+  image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://localhost:2375
+    CI_REGISTRY_IMAGE: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/${CI_PROJECT_NAME}
+  before_script:
+    - export CI_REGISTRY_TAG=$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build --pull -f Dockerfile -t $CI_REGISTRY_IMAGE:$CI_REGISTRY_TAG .
+    - docker tag $CI_REGISTRY_IMAGE:$CI_REGISTRY_TAG $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:$CI_REGISTRY_TAG
+    - docker push $CI_REGISTRY_IMAGE:latest
+    - docker rmi $CI_REGISTRY_IMAGE:$CI_REGISTRY_TAG
+    - docker rmi $CI_REGISTRY_IMAGE:latest
+  when: manual
+  only:
+    - master
+    - develop
+    - tags

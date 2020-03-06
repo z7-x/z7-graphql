@@ -2,12 +2,6 @@ server:
   port: 8080
 
 spring:
-  data:
-    elasticsearch:
-      cluster-name: docker-cluster
-      cluster-nodes: 192.168.192.128:9300
-      repositories:
-        enabled: false
   main:
     allow-bean-definition-overriding: true
   datasource:
@@ -79,9 +73,6 @@ graphql:
 logging:
   path: ~/logs
   config: classpath:logback.xml
-  #监听端口号
-udp:
-  port: 6060
 
 
 
