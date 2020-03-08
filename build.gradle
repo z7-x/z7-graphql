@@ -10,26 +10,16 @@ buildscript {
 
 plugins {
     id 'idea'
-    id "io.spring.dependency-management" version "1.0.8.RELEASE"
-    id "org.sonarqube" version "2.7.1"
-    id "com.jfrog.artifactory" version "4.9.8"
-    id "org.zeroturnaround.gradle.jrebel" version "1.1.8"
-    id "com.google.protobuf" version "0.8.10"
-    id 'org.springframework.boot' version '2.1.4.RELEASE'
+    id "io.spring.dependency-management" version "${PLUGIN_SPRING_DEPENDENCY_MANAGEMENT_VER}"
+    id "org.sonarqube" version "${PLUGIN_SONARQUBE_VER}"
+    id "com.jfrog.artifactory" version "${PLUGIN_ARTIFACTORY_VER}"
+    id "org.zeroturnaround.gradle.jrebel" version "${PLUGIN_JREBEL_VER}"
+    id "com.google.protobuf" version "${PLUGIN_PROTOBUF_VER}"
+    id 'org.springframework.boot' version "${LIB_SPRING_BOOT_VER}"
 }
 
-ext {
-    coreVersion = "0.4.22"
-    protobufVersion = "3.8.0"
-    grpcVersion = "1.23.0"
-    springBootVersion = "2.1.4.RELEASE"
-    kotlinVersion = "1.3.10"
-    LIB_GRAPHQL_JAVA_VER = "12.0"
-    MAPSTRUCT_VERSION = "1.3.0.Final"
-}
-
-group = 'net.whir.hos'
-description = "内容管理"
+group = 'com.thuni.his'
+description = "演示项目"
 version = System.getenv()['CI_BUILD_TAG']
 status = 'integration'
 
@@ -39,7 +29,6 @@ repositories {
 
 apply plugin: 'idea'
 apply plugin: 'java'
-apply plugin: 'com.jfrog.artifactory'
 apply plugin: "jacoco"
 apply plugin: 'com.google.protobuf'
 apply plugin: 'io.spring.dependency-management'
@@ -47,6 +36,7 @@ apply plugin: 'org.springframework.boot'
 
 jar {
     manifest {
+        attributes 'provider': 'gradle'
         attributes 'Main-Class': 'net.whir.hos.Application'
     }
 }
@@ -62,31 +52,12 @@ idea {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-sourceSets {
-    main {
-        java {
-            srcDir 'JavaSource'
-        }
-        resources {
-            srcDir 'resources'
-        }
-        proto {
-            srcDir 'proto'
-            include '**/*.proto'
-        }
-    }
-    test {
-        java.srcDirs = ['test/src']
-        resources.srcDirs = ["test/config"]
-    }
-}
-
 protobuf {
     protoc {
         if (org.gradle.internal.os.OperatingSystem.current().isLinux()) {
             path = '/usr/local/bin/protoc'
         } else {
-            artifact = "com.google.protobuf:protoc:${protobufVersion}"
+            artifact = "com.google.protobuf:protoc:${LIB_PROTOBUF_VER}"
         }
     }
     plugins {
@@ -131,47 +102,31 @@ plugins.withId('java') {
     }
 }
 
-manifest {
-    attributes 'provider': 'gradle'
-}
-
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") {
-            bomProperty("kotlin.version", "${kotlinVersion}")
-        }
-        mavenBom "io.grpc:grpc-bom:${grpcVersion}"
-        mavenBom "com.google.protobuf:protobuf-bom:${protobufVersion}"
-    }
-    dependencies {
-        dependency "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
+        mavenBom("org.springframework.boot:spring-boot-dependencies:${LIB_SPRING_BOOT_VER}")
+        mavenBom "io.grpc:grpc-bom:${LIB_GRPC_VER}"
+        mavenBom "com.google.protobuf:protobuf-bom:${LIB_PROTOBUF_VER}"
     }
 }
 
 dependencies {
-    compile("org.jfantasy:jfantasy-core:${coreVersion}") {
-        exclude group: 'org.springframework.boot'
-    }
-    compile "org.jfantasy:jfantasy-storage:${coreVersion}"
-    compile "org.jfantasy:jfantasy-graphql:${coreVersion}"
-    compile "org.springframework.boot:spring-boot-starter-web"
-    compile "org.springframework.boot:spring-boot-starter-quartz"
-    compile "org.springframework.boot:spring-boot-starter-data-jpa"
-    compile "org.springframework.boot:spring-boot-starter-actuator"
-    compile 'net.devh:grpc-server-spring-boot-starter:2.5.1.RELEASE'
-    compile 'org.mapstruct:mapstruct:1.3.0.Final'
-    compileOnly 'org.projectlombok:lombok:1.18.8'
-    annotationProcessor 'org.projectlombok:lombok:1.18.8'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.3.0.Final'
-    testAnnotationProcessor 'org.mapstruct:mapstruct-processor:1.3.0.Final'
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    compile "org.jfantasy:jfantasy-core:$LIB_JFAN_VER"
+    compile "org.jfantasy:jfantasy-graphql:$LIB_JFAN_VER"
+    compile "net.devh:grpc-server-spring-boot-starter:${LIB_GRPC_SERVER_VER}"
+    compile "org.mapstruct:mapstruct:${LIB_MAPSTRUCT_VER}"
+    compileOnly "org.projectlombok:lombok:${LIB_LOMBOK_VER}"
+    testCompile "com.graphql-java-kickstart:graphql-spring-boot-starter-test:$LIB_GRAPHQL_VER"
+    annotationProcessor "org.projectlombok:lombok:$LIB_LOMBOK_VER"
+    annotationProcessor "org.mapstruct:mapstruct-processor:$LIB_MAPSTRUCT_VER"
+    testAnnotationProcessor "org.mapstruct:mapstruct-processor:$LIB_MAPSTRUCT_VER"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${LIB_SPRING_BOOT_VER}"
 }
 
 test {
     ignoreFailures = true
 
     jacoco {
-        append = false
         destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
         classDumpDir = file("$buildDir/jacoco/classpathdumps")
     }
@@ -185,40 +140,4 @@ sonarqube {
         property "sonar.links.issue", "http://gitlab.thuni-h.com/apis/framework/issues"
         property "sonar.links.scm", "http://gitlab.thuni-h.com/apis/framework.git"
     }
-}
-
-configurations {
-    published
-}
-
-task sourceJar(type: Jar) {
-    from sourceSets.main.allSource
-}
-
-artifactoryPublish {
-    dependsOn sourceJar
-}
-
-artifacts {
-    published sourceJar
-}
-
-
-artifactory {
-    contextUrl = System.getenv()['ARTIFACTORY_URL']
-    publish {
-        repository {
-            repoKey = System.getenv()['MAVEN_REPO_KEY']
-            username = System.getenv()['ARTIFACTORY_USER']
-            password = System.getenv()['ARTIFACTORY_PASS']
-        }
-        defaults {
-            publishConfigs('archives', 'published')
-            publishPom = true
-            publishIvy = false
-        }
-    }
-    clientConfig.setIncludeEnvVars(true)
-    clientConfig.setEnvVarsExcludePatterns('*password*,*secret*')
-    clientConfig.info.setBuildNumber(System.getenv()['CI_JOB_ID'])
 }

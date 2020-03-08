@@ -27,21 +27,5 @@ grpc:
       keepAliveWithoutCalls: true
       negotiationType: plaintext
 
-storage:
-  url: ${UPLOAD_SERVER_URL}
-
-es:
-  clustername:
-    cluster_elasticsearch
-  ip:
-    ${ELASTICSEARCH_HOST}
-  port:
-    ${ELASTICSEARCH_PORT}
-
-oa:
-  host: ${OA_HOST}
-  file:
-    url: ${OA_FILE_URL}
-  link: ${OA_LINK}
-role:
-  name: ${ROLE_NAME}
+#storage:
+#  url: ${UPLOAD_SERVER_URL}
