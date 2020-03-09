@@ -116,11 +116,13 @@ dependencies {
     compile "net.devh:grpc-server-spring-boot-starter:${LIB_GRPC_SERVER_VER}"
     compile "org.mapstruct:mapstruct:${LIB_MAPSTRUCT_VER}"
     compileOnly "org.projectlombok:lombok:${LIB_LOMBOK_VER}"
-    testCompile "com.graphql-java-kickstart:graphql-spring-boot-starter-test:$LIB_GRAPHQL_VER"
     annotationProcessor "org.projectlombok:lombok:$LIB_LOMBOK_VER"
     annotationProcessor "org.mapstruct:mapstruct-processor:$LIB_MAPSTRUCT_VER"
-    testAnnotationProcessor "org.mapstruct:mapstruct-processor:$LIB_MAPSTRUCT_VER"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${LIB_SPRING_BOOT_VER}"
+    testCompile "com.graphql-java-kickstart:graphql-spring-boot-starter-test:$LIB_GRAPHQL_VER"
+    testCompileOnly "org.projectlombok:lombok:${LIB_LOMBOK_VER}"
+    testAnnotationProcessor "org.projectlombok:lombok:$LIB_LOMBOK_VER"
+    testAnnotationProcessor "org.mapstruct:mapstruct-processor:$LIB_MAPSTRUCT_VER"
 }
 
 test {

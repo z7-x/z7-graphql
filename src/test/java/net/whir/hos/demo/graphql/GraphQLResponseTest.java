@@ -1,9 +1,11 @@
 package net.whir.hos.demo.graphql;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.graphql.spring.boot.test.GraphQLResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.whir.hos.TestApplication;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -73,7 +75,7 @@ public class GraphQLResponseTest {
         final String expected
     ) {
         //GIVEN
-        final GraphQLResponse graphQLResponse = new GraphQLResponse(ResponseEntity.ok(bodyString), objectMapper);
+        final GraphQLResponse graphQLResponse = new GraphQLResponse(ResponseEntity.ok(bodyString));
         //WHEN
         final String actual = graphQLResponse.get(DATA_PATH);
         //THEN
@@ -89,7 +91,7 @@ public class GraphQLResponseTest {
         final T expected
     ) {
         //GIVEN
-        final GraphQLResponse graphQLResponse = new GraphQLResponse(ResponseEntity.ok(bodyString), objectMapper);
+        final GraphQLResponse graphQLResponse = new GraphQLResponse(ResponseEntity.ok(bodyString));
         //WHEN
         final T actual = graphQLResponse.get(DATA_PATH, clazz);
         //THEN
@@ -105,9 +107,9 @@ public class GraphQLResponseTest {
         final List<T> expected
     ) {
         //GIVEN
-        final GraphQLResponse graphQLResponse = new GraphQLResponse(ResponseEntity.ok(bodyString), objectMapper);
+        final GraphQLResponse graphQLResponse = new GraphQLResponse(ResponseEntity.ok(bodyString));
         //WHEN
-        final List<T> actual = graphQLResponse.getList(DATA_PATH, clazz);
+        final List<T> actual = (List<T>) graphQLResponse.get(DATA_PATH, clazz);
         //THEN
         assertThat(actual).containsExactlyElementsOf(expected);
     }
