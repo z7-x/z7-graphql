@@ -17,11 +17,11 @@ build:
   script:
     - ./gradlew clean build -x test
     - mv build/libs/*.jar build/app.jar
-    - mv sql-scripts build/sql-scripts
+    # - mv sql-scripts build/sql-scripts
   artifacts:
     paths:
       - build/app.jar
-      - build/sql-scripts
+      # - build/sql-scripts
 
 sonarqube:
   stage: test
