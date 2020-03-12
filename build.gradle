@@ -123,9 +123,18 @@ dependencies {
     testCompileOnly "org.projectlombok:lombok:${LIB_LOMBOK_VER}"
     testAnnotationProcessor "org.projectlombok:lombok:$LIB_LOMBOK_VER"
     testAnnotationProcessor "org.mapstruct:mapstruct-processor:$LIB_MAPSTRUCT_VER"
+    implementation("org.springframework:spring-web")
+    implementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+    implementation("com.jayway.jsonpath:json-path")
+    compileOnly("com.graphql-java:graphql-java:$LIB_GRAPHQL_JAVA_VER")
+    compileOnly("com.graphql-java-kickstart:graphql-java-servlet:$LIB_GRAPHQL_SERVLET_VER")
+    testImplementation("org.springframework.boot:spring-boot-starter-web")
 }
 
 test {
+    useJUnitPlatform()
+
     ignoreFailures = true
 
     jacoco {

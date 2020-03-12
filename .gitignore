@@ -10,3 +10,7 @@
 ### Build
 .gradle
 build
+
+### Graphql Plugin
+.graphqlconfig
+schema.graphql

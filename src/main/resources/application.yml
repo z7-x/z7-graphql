@@ -64,15 +64,10 @@ spring:
 
 graphql:
   servlet:
-    websocket:
-      enabled: false
     exception-handlers-enabled: true
-  tools:
-    schema-location-pattern: "**/*.graphqls"
-    introspection-enabled: true
+
 logging:
-  path: ~/logs
   config: classpath:logback.xml
-
-
+  file:
+    path: ~/logs
 
