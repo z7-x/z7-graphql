@@ -132,6 +132,10 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-web")
 }
 
+task dev {
+    bootRun.systemProperty 'spring.profiles.active', 'dev'
+}
+
 test {
     useJUnitPlatform()
 
