@@ -5,21 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.jfantasy.graphql.Connection;
 import org.jfantasy.graphql.Edge;
-import org.jfantasy.graphql.PageInfo;
-import org.jfantasy.graphql.Pagination;
+import org.jfantasy.graphql.types.BaseConnection;
 
 import java.util.List;
 
 @Data
-public class UserConnection implements Connection<UserConnection.UserEdge>, Pagination {
-
-    private Integer totalCount;
-    private Integer pageSize;
-    private Integer totalPage;
-    private Integer currentPage;
-    private PageInfo pageInfo;
+public class UserConnection extends BaseConnection<UserConnection.UserEdge> {
     private List<UserEdge> edges;
 
     @Data
