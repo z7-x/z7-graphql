@@ -40,8 +40,10 @@ sonarqube:
     GIT_DEPTH: 0
     SONAR_ANALYSIS_MODE: publish
     SONAR_BRANCH: $CI_COMMIT_REF_NAME
+    SONAR_PROJECT_KEY: ${CI_PROJECT_NAMESPACE//\//_}:$CI_PROJECT_NAME
   before_script:
-    - export SONAR_PROJECT_KEY=${CI_PROJECT_NAMESPACE//\/_}:$CI_PROJECT_NAME
+    - echo $SONAR_PROJECT_KEY
+    - export SONAR_PROJECT_KEY=${CI_PROJECT_NAMESPACE//\//_}:$CI_PROJECT_NAME
     - echo $SONAR_PROJECT_KEY
   script:
     - gitlab-sonar-scanner -Dsonar.qualitygate.wait=true
