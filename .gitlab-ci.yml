@@ -24,15 +24,22 @@ build:
 
 sonarqube:
   stage: analysis
-  dependencies:
-    - build
   image: core.harbor.thuni-h.com/limaofeng/gitlab-sonar-scanner
+  cache:
+    paths:
+      - .gradle/caches/
+      - .gradle/wrapper/
   variables:
+    GIT_DEPTH: 0
     SONAR_ANALYSIS_MODE: publish
     SONAR_BRANCH: $CI_COMMIT_REF_NAME
     SONAR_PROJECT_KEY: $CI_PROJECT_NAMESPACE:$CI_PROJECT_NAME
   script:
-    - gitlab-sonar-scanner
+    - ./gradlew clean classes -x test
+    - gitlab-sonar-scanner -Dsonar.qualitygate.wait=true
+  only:
+    - merge_requests
+    - master
   allow_failure: true
 
 # 构建镜像
