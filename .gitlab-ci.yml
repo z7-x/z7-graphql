@@ -21,6 +21,9 @@ build:
   artifacts:
     paths:
       - build/app.jar
+  only:
+    - merge_requests
+    - branches
 
 sonarqube:
   stage: analysis
