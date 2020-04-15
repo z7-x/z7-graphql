@@ -1,6 +1,7 @@
 stages:
   - build
   - test
+  - analysis
   - release
   - deploy
 
@@ -17,14 +18,14 @@ build:
   script:
     - ./gradlew clean build -x test
     - mv build/libs/*.jar build/app.jar
-    # - mv sql-scripts build/sql-scripts
   artifacts:
     paths:
-      - build/app.jar
-      # - build/sql-scripts
+      - build
 
 sonarqube:
-  stage: test
+  stage: analysis
+  dependencies:
+    - build
   image: core.harbor.thuni-h.com/limaofeng/gitlab-sonar-scanner
   variables:
     SONAR_ANALYSIS_MODE: publish
@@ -32,13 +33,6 @@ sonarqube:
     SONAR_PROJECT_KEY: $CI_PROJECT_NAMESPACE:$CI_PROJECT_NAME
   script:
     - gitlab-sonar-scanner
-  cache:
-    paths:
-      - node_modules/
-      - yarn.lock
-  only:
-    - master
-    - tags
   allow_failure: true
 
 # 构建镜像
