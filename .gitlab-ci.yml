@@ -20,7 +20,8 @@ build:
     - mv build/libs/*.jar build/app.jar
   artifacts:
     paths:
-      - build/app.jar
+      - build
+    expire_in: 7 days
   only:
     - merge_requests
     - branches
@@ -28,6 +29,8 @@ build:
 sonarqube:
   stage: analysis
   image: core.harbor.thuni-h.com/limaofeng/gitlab-sonar-scanner
+  dependencies:
+    - build
   cache:
     paths:
       - .gradle/caches/
@@ -38,7 +41,6 @@ sonarqube:
     SONAR_BRANCH: $CI_COMMIT_REF_NAME
     SONAR_PROJECT_KEY: $CI_PROJECT_NAMESPACE:$CI_PROJECT_NAME
   script:
-    - ./gradlew clean classes -x test
     - gitlab-sonar-scanner -Dsonar.qualitygate.wait=true
   only:
     - merge_requests
