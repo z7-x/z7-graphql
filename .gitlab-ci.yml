@@ -72,5 +72,4 @@ release:
   when: manual
   only:
     - master
-    - develop
     - tags
