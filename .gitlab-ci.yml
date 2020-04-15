@@ -25,6 +25,7 @@ build:
   only:
     - merge_requests
     - branches
+    - tags
 
 sonarqube:
   stage: analysis
