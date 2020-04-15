@@ -20,7 +20,7 @@ build:
     - mv build/libs/*.jar build/app.jar
   artifacts:
     paths:
-      - build
+      - build/app.jar
 
 sonarqube:
   stage: analysis
