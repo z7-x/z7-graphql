@@ -11,7 +11,6 @@ buildscript {
 plugins {
     id 'idea'
     id "io.spring.dependency-management" version "${PLUGIN_SPRING_DEPENDENCY_MANAGEMENT_VER}"
-    id "org.sonarqube" version "${PLUGIN_SONARQUBE_VER}"
     id "com.jfrog.artifactory" version "${PLUGIN_ARTIFACTORY_VER}"
     id "org.zeroturnaround.gradle.jrebel" version "${PLUGIN_JREBEL_VER}"
     id "com.google.protobuf" version "${PLUGIN_PROTOBUF_VER}"
@@ -136,6 +135,12 @@ task dev {
     bootRun.systemProperty 'spring.profiles.active', 'dev'
 }
 
+task copyDependencies(type: Sync) {
+    from configurations.compileClasspath
+    from configurations.compileOnly
+    into 'build/dependencies'
+}
+
 test {
     useJUnitPlatform()
 
@@ -146,13 +151,4 @@ test {
         classDumpDir = file("$buildDir/jacoco/classpathdumps")
     }
 
-}
-
-sonarqube {
-    properties {
-        property "sonar.sourceEncoding", "UTF-8"
-        property "sonar.links.ci", "http://gitlab.thuni-h.com/ci"
-        property "sonar.links.issue", "http://gitlab.thuni-h.com/apis/framework/issues"
-        property "sonar.links.scm", "http://gitlab.thuni-h.com/apis/framework.git"
-    }
 }

@@ -1,34 +1,23 @@
 package com.thuni.his;
 
-import com.thuni.his.Application;
 import lombok.extern.slf4j.Slf4j;
 import org.jfantasy.framework.dao.jpa.ComplexJpaRepository;
-import org.jfantasy.framework.spring.config.DaoConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.elasticsearch.rest.RestClientAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.autoconfigure.quartz.QuartzAutoConfiguration;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
-import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * @author limaofeng
  * @version V1.0
- * @Description: TODO
- * @date 2020/3/7 2:39 下午
- */
-
-/**
- * @author limaofeng
- * @version V1.0
- * @Description: TODO
+ * @Description: 测试程序入口
  * @date 2019/2/13 4:04 PM
  */
 @Slf4j

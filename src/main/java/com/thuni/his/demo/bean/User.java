@@ -11,8 +11,8 @@ import javax.persistence.*;
 /**
  * @author limaofeng
  * @version V1.0
- * @Description: TODO
- * @date 2019-03-15 15:38
+ * @Description: 用户
+ * @date 2020-03-15 15:38
  */
 @Data
 @Builder

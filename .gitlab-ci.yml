@@ -16,7 +16,7 @@ build:
   before_script:
     - export GRADLE_USER_HOME=$PWD/.gradle
   script:
-    - ./gradlew clean build -x test
+    - ./gradlew clean build -x test copyDependencies
     - mv build/libs/*.jar build/app.jar
   artifacts:
     paths:
