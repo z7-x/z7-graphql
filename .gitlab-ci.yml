@@ -38,7 +38,7 @@ sonarqube:
       - .gradle/wrapper/
   script:
     - gitlab-sonar-scanner \
-      -Dsonar.coverage.jacoco.xmlReportPaths=build/reports/jacoco/test/jacocoTestReport.xml \
+      -Dsonar.coverage.jacoco.xmlReportPaths=build/reports/Coverage.xml \
       -Dsonar.qualitygate.wait=true
   only:
     - merge_requests
