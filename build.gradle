@@ -141,6 +141,13 @@ task copyDependencies(type: Sync) {
     into 'build/dependencies'
 }
 
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
+    }
+}
+
 test {
     useJUnitPlatform()
 

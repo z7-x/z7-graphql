@@ -16,7 +16,7 @@ build:
   before_script:
     - export GRADLE_USER_HOME=$PWD/.gradle
   script:
-    - ./gradlew clean build -x test copyDependencies
+    - ./gradlew clean build jacocoTestReport copyDependencies
     - mv build/libs/*.jar build/app.jar
   artifacts:
     paths:
@@ -37,7 +37,9 @@ sonarqube:
       - .gradle/caches/
       - .gradle/wrapper/
   script:
-    - gitlab-sonar-scanner -Dsonar.qualitygate.wait=true
+    - gitlab-sonar-scanner \
+      -Dsonar.coverage.jacoco.xmlReportPaths=build/reports/jacoco/test/jacocoTestReport.xml \
+      -Dsonar.qualitygate.wait=true
   only:
     - merge_requests
     - master
