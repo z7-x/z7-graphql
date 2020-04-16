@@ -20,18 +20,33 @@ build:
     - mv build/libs/*.jar build/app.jar
   artifacts:
     paths:
-      - build
+      - build/app.jar
     expire_in: 7 days
+
+test:
+  stage: test
+  image: core.harbor.thuni-h.com/limaofeng/java-protoc:v2
+  cache:
+    paths:
+      - .gradle/caches/
+      - .gradle/wrapper/
+  before_script:
+    - export GRADLE_USER_HOME=$PWD/.gradle
+  script:
+    - ./gradlew clean build jacocoTestReport copyDependencies
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 days
   only:
     - merge_requests
-    - branches
-    - tags
+    - master
 
 sonarqube:
   stage: analysis
   image: core.harbor.thuni-h.com/limaofeng/gitlab-sonar-scanner
   dependencies:
-    - build
+    - test
   cache:
     paths:
       - .gradle/caches/
