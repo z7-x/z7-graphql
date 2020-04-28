@@ -1,6 +1,7 @@
 type Query {
     # 用户列表
     users(filter: UserFilter, page: Int = 1, pageSize: Int = 15, orderBy: OrderBy): UserConnection
+
 }
 
 type Mutation {
@@ -9,9 +10,9 @@ type Mutation {
 
 input UserCreateInput {
     #登录名
-    username:String
+    username:String!
     #登录密码
-    password:String
+    password:String!
 }
 
 input UserFilter {
@@ -51,5 +52,16 @@ type User {
     updatedAt: Date
 }
 
+# 页信息
+type PageInfo {
+    # 是否存在下一页
+    hasNextPage: Boolean
+    # 是否存在上一页
+    hasPreviousPage: Boolean
+    # 数据页第一个游标
+    startCursor: String
+    # 数据页最后一个游标
+    endCursor: String
+}
 scalar Date
 scalar OrderBy
