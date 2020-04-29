@@ -1,7 +1,8 @@
 type Query {
     # 用户列表
     users(filter: UserFilter, page: Int = 1, pageSize: Int = 15, orderBy: OrderBy): UserConnection
-
+    # 根据用户编号查询用户信息
+    findUserById(userId:ID!):User
 }
 
 type Mutation {
