@@ -1,0 +1,90 @@
+extend type Query {
+    # 根据人员编号查询人员信息
+    findMicroservicePeopleById(id:ID):People
+    # 查询人员信息
+    findMicroservicePeople:[People]
+    # 模糊查询人员信息
+    dimFindMicroservicePeople(filter:PeopleFilter,page: Int = 1, pageSize: Int = 15, orderBy: OrderBy):PeopleConnection
+}
+
+
+extend type Mutation {
+    # 新增人员信息
+    addMicroservicePeople(input:PeopleInput):People
+    # 修改人员信息
+    updateMicroservicePeople(id:ID!,input: PeopleInput,merge:Boolean = true):People
+    # 删除人员信息
+    deleteMicroservicePeople(id:ID!):Boolean
+}
+
+
+type PeopleConnection{
+    # 总数据条数
+    totalCount: Int
+    # 每页显示条数
+    pageSize: Int
+    # 总页数
+    totalPage: Int
+    # 当前页
+    currentPage: Int
+    edges: [PeopleEdge]
+    pageInfo: PageInfo
+}
+
+type PeopleEdge{
+    cursor: String
+    node: People
+}
+
+input PeopleFilter{
+    name:String
+    sex:String
+    birthday:String
+    phone:String
+    address:String
+}
+
+input PeopleInput{
+    # 姓名
+    name:String
+    # 性别
+    sex:String
+    # 生日
+    birthday:String
+    # 地址
+    address:AddressInput
+}
+
+# 地址
+input AddressInput{
+    # 家庭电话
+    phone:String
+    # 邮政编码
+    zipcode:String
+    # 地址
+    address:String
+}
+
+type People{
+    # 人员主键
+    id:ID
+    # 姓名
+    name:String
+    # 性别
+    sex:String
+    # 生日
+    birthday:Date
+    # 地址
+    address:Address
+}
+
+type Address{
+    # 地址主键
+    id:ID
+    # 家庭电话
+    phone:String
+    # 邮政编码
+    zipcode:String
+    # 地址
+    address:String
+}

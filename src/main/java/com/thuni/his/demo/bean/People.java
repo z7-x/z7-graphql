@@ -4,9 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.jfantasy.framework.dao.BaseBusEntity;
 
 import javax.persistence.*;
-import java.security.Timestamp;
+import java.util.Date;
 
 @Data
 @Builder
@@ -14,7 +15,7 @@ import java.security.Timestamp;
 @NoArgsConstructor
 @Entity
 @Table(name = "ts_people")
-public class People {
+public class People  extends BaseBusEntity {
     /**
      * 主键编号
      */
@@ -39,14 +40,14 @@ public class People {
      * 生日
      */
     @Column(name = "birthday")
-    private Timestamp birthday;
+    private Date birthday;
 
     /**
      * 地址
+     * optional = false指明 Address 不可为空
+     * people 中的 address_id 字段参考 address 表中的id字段,referencedColumnName="id" 实际可以省略
      */
-    @OneToOne(fetch = FetchType.LAZY)
-    //people中的address_id字段参考address表中的id字段,referencedColumnName="id"实际可以省略
-    @JoinColumn(name = "addressId",referencedColumnName="id")
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "addressId",referencedColumnName="id",unique = true)
     private Address address;
-
 }
