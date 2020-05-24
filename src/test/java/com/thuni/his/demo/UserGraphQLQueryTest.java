@@ -1,4 +1,4 @@
-package com.thuni.his.demo.graphql;
+package com.thuni.his.demo;
 
 import com.graphql.spring.boot.test.GraphQLResponse;
 import com.graphql.spring.boot.test.GraphQLTestTemplate;

@@ -24,6 +24,7 @@ public class TsGraphQLQueryResolver implements GraphQLQueryResolver {
     @Autowired
     private PeopleService peopleService;
 
+
     /**
      * 根据id查询
      * @param id 传入员工id
@@ -53,4 +54,5 @@ public class TsGraphQLQueryResolver implements GraphQLQueryResolver {
         PropertyFilterBuilder builder = ObjectUtil.defaultValue(filter, new PeopleFilter()).getBuilder();
         return Kit.connection(peopleService.findPage(new Pager<>(page, pageSize, orderBy), builder.build()), PeopleConnection.class);
     }
+
 }

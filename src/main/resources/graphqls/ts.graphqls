@@ -7,16 +7,91 @@ extend type Query {
     dimFindMicroservicePeople(filter:PeopleFilter,page: Int = 1, pageSize: Int = 15, orderBy: OrderBy):PeopleConnection
 }
 
-
 extend type Mutation {
     # 新增人员信息
-    addMicroservicePeople(input:PeopleInput):People
+    createMicroservicePeople(input:PeopleInput):People
     # 修改人员信息
     updateMicroservicePeople(id:ID!,input: PeopleInput,merge:Boolean = true):People
     # 删除人员信息
     deleteMicroservicePeople(id:ID!):Boolean
+
+    # 新增作者信息的同时新增文章信息
+    createMicroserviceAuthor(input:AuthorInput):Author
+    # 新增文章信息
+    createMicroserviceArticle(input:ArticleAddInput):Article
+    # 更新作者
+    updateMicroserviceAuthor(id:ID!,merge:Boolean = true,input:AuthorBatchInput):Author
+    # 更新文章
+    updateMicroserviceArticle(id:ID!merge:Boolean = true,input:ArticleBatchInput):Article
+    # 删除作者的同时删除作者对应的文章信息
+    deleteMicroserviceAuthor(id:ID!):Boolean
 }
 
+input AuthorityInput{
+    # 权限名称
+    name:String
+}
+
+type Authority{
+    # 权限id
+    id:ID
+    # 权限名称
+    name:String
+}
+
+type Author{
+    # 主键id
+    id:ID
+    # 作者
+    name:String
+    # 文章
+    articleList:[Article]
+}
+
+type Article{
+    # 主键id
+    id:ID
+    # 文章标题
+    title:String
+    # 文章内容
+    content:String
+    # 所属作者
+    author:Author
+}
+
+input AuthorInput{
+    # 作者
+    name:String!
+    articleList:[ArticleInput]
+}
+
+input AuthorBatchInput{
+    # 作者姓名
+    name:String!
+}
+
+input ArticleBatchInput{
+    # 文章标题
+    title:String
+    # 文章内容
+    content:String
+}
+
+input ArticleInput{
+    # 文章标题
+    title:String!
+    # 文章内容
+    content:String!
+}
+
+input ArticleAddInput{
+    # 文章标题
+    title:String!
+    # 文章内容
+    content:String!
+    # 所属作者
+    author:ID!
+}
 
 type PeopleConnection{
     # 总数据条数

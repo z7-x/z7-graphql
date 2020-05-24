@@ -3,6 +3,7 @@ package com.thuni.his.demo.graphql.inputs;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jfantasy.graphql.inputs.QueryFilter;
 
+//注意，这里只需要跟java的实体层对应上就行了
 public class PeopleFilter extends QueryFilter {
 
     /**
