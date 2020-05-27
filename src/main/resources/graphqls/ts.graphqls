@@ -37,6 +37,8 @@ type Authority{
     id:ID
     # 权限名称
     name:String
+    # 权限拥有者
+    userList:[User]
 }
 
 type Author{

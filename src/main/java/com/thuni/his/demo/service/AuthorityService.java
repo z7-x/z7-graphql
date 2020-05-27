@@ -1,15 +1,21 @@
 package com.thuni.his.demo.service;
 
 import com.thuni.his.demo.bean.Authority;
+import com.thuni.his.demo.bean.User;
 import com.thuni.his.demo.dao.AuthorityDao;
+import com.thuni.his.demo.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AuthorityService {
 
     @Autowired
     private AuthorityDao authorityDao;
+    @Autowired
+    private UserDao userDao;
 
     /**
      * 保存权限
@@ -23,5 +29,15 @@ public class AuthorityService {
      */
     public Authority updateAuthority(Authority authority,Boolean merge){
         return authorityDao.update(authority,merge);
+    }
+
+    /**
+     * 多对多保存: 用户权限
+     */
+    public Authority saveAuthorityUser(Authority authority){
+        Authority save = authorityDao.save(authority);
+        List<User> userList = userDao.saveAll(save.getUserList());
+        save.setUserList(userList);
+        return save;
     }
 }

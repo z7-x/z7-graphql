@@ -14,8 +14,10 @@ import com.thuni.his.demo.service.AuthorService;
 import com.thuni.his.demo.service.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Transactional
 public class TsGraphQLMutationResolver implements GraphQLMutationResolver {
     @Autowired
     private PeopleService peopleService;

@@ -110,6 +110,9 @@ dependencyManagement {
 }
 
 dependencies {
+    compile 'log4j:log4j:1.2.17'
+    compile 'org.apache.poi:poi:3.17'
+    compile 'org.apache.poi:poi-ooxml:3.17'
     compile "org.jfantasy:jfantasy-core:$LIB_JFAN_VER"
     compile "org.jfantasy:jfantasy-graphql:$LIB_JFAN_VER"
     compile "net.devh:grpc-server-spring-boot-starter:${LIB_GRPC_SERVER_VER}"

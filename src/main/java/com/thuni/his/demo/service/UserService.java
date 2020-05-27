@@ -1,6 +1,8 @@
 package com.thuni.his.demo.service;
 
+import com.thuni.his.demo.bean.Authority;
 import com.thuni.his.demo.bean.User;
+import com.thuni.his.demo.dao.AuthorityDao;
 import com.thuni.his.demo.dao.UserDao;
 import org.jfantasy.framework.dao.Pager;
 import org.jfantasy.framework.dao.jpa.PropertyFilter;
@@ -19,7 +21,10 @@ import java.util.stream.Collectors;
 @Transactional(rollbackFor = Exception.class)
 public class UserService {
 
-    private final UserDao userDao;
+    @Autowired
+    private  UserDao userDao;
+    @Autowired
+    private AuthorityDao authorityDao;
 
     @Autowired
     public UserService(UserDao userDao) {
@@ -52,4 +57,13 @@ public class UserService {
         return this.userDao.findById(id);
     }
 
+    /**
+     * 多对多保存: 用户权限
+     */
+    public User saveUserAuthority(User user){
+        User save = userDao.save(user);
+        List<Authority> authorities = authorityDao.saveAll(user.getAuthorityList());
+        save.setAuthorityList(authorities);
+        return save;
+    }
 }
