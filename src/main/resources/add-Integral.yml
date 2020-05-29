@@ -1,0 +1,895 @@
+- apiVersion: apps/v1beta1
+  kind: Type
+  metadata:
+    name: BranchIntegral
+  spec:
+    id: BranchIntegral
+    name: BranchIntegral
+    title: "支部积分"
+    description: "支部积分"
+    kind: Type
+- apiVersion: apps/v1beta1
+  kind: Type
+  metadata:
+    name: PeopleBranchIntegral
+  spec:
+    id: PeopleBranchIntegral
+    name: PeopleBranchIntegral
+    title: "人员支部积分"
+    description: "人员支部积分"
+    kind: Type
+- apiVersion: apps/v1beta1
+  kind: Type
+  metadata:
+    name: PeopleBranchIntegralConnection
+  spec:
+    id: PeopleBranchIntegralConnection
+    name: PeopleBranchIntegralConnection
+    title: "人员支部积分分页"
+    description: "人员支部积分分页"
+    kind: Type
+- apiVersion: apps/v1beta1
+  kind: Type
+  metadata:
+    name: PBIntegral
+  spec:
+    id: PBIntegral
+    name: PBIntegral
+    title: "人员支部积分分页返回参数"
+    description: "人员支部积分分页返回参数"
+    kind: Type
+- apiVersion: apps/v1beta1
+  kind: Type
+  metadata:
+    name: BranchIntegralConnection
+  spec:
+    id: BranchIntegralConnection
+    name: BranchIntegralConnection
+    title: "支部积分分页"
+    description: "支部积分分页"
+    kind: Type
+- apiVersion: apps/v1beta1
+  kind: Type
+  metadata:
+    name: BIntegralEdge
+  spec:
+    id: BIntegralEdge
+    name: BIntegralEdge
+    title: "支部积分分页返回参数"
+    description: "支部积分分页返回参数"
+    kind: Type
+- apiVersion: apps/v1beta1
+  kind: Type
+  metadata:
+    name: BranchIntegralInput
+  spec:
+    id: BranchIntegralInput
+    name: BranchIntegralInput
+    title: "支部积分输入参数"
+    description: "支部积分输入参数"
+    kind: Input
+- apiVersion: apps/v1beta1
+  kind: Type
+  metadata:
+    name: PeopleBranchIntegralInput
+  spec:
+    id: PeopleBranchIntegralInput
+    name: PeopleBranchIntegralInput
+    title: "人员支部积分输入参数"
+    description: "人员支部积分输入参数"
+    kind: Input
+- apiVersion: apps/v1beta1
+  kind: Type
+  metadata:
+    name: BranchIntegralFilter
+  spec:
+    id: BranchIntegralFilter
+    name: BranchIntegralFilter
+    title: "支部积分过滤参数"
+    description: "支部积分过滤参数"
+    kind: Input
+- apiVersion: apps/v1beta1
+  kind: Type
+  metadata:
+    name: PeopleBranchIntegralFilter
+  spec:
+    id: PeopleBranchIntegralFilter
+    name: PeopleBranchIntegralFilter
+    title: "人员支部积分过滤参数"
+    description: "人员支部积分过滤参数"
+    kind: Input
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: BranchIntegralInput.branchName
+  spec:
+    id: "BranchIntegralInput.branchName"
+    name: "branchName"
+    kind: BranchIntegralInput
+    type:
+      repeated: false
+      required: false
+      kind: String
+    deprecated: false
+    defaultValue: null
+    description: "支部名称输入参数"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: BranchIntegralInput.branchIntegral
+  spec:
+    id: "BranchIntegralInput.branchIntegral"
+    name: "branchIntegral"
+    kind: BranchIntegralInput
+    type:
+      repeated: false
+      required: false
+      kind: Int
+    deprecated: false
+    defaultValue: null
+    description: "支部积分输入参数"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: PeopleBranchIntegralInput.peopleName
+  spec:
+    id: "PeopleBranchIntegralInput.peopleName"
+    name: "peopleName"
+    kind: PeopleBranchIntegralInput
+    type:
+      repeated: false
+      required: false
+      kind: String
+    deprecated: false
+    defaultValue: null
+    description: "姓名输入参数"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: PeopleBranchIntegralInput.branchName
+  spec:
+    id: "PeopleBranchIntegralInput.branchName"
+    name: "branchName"
+    kind: PeopleBranchIntegralInput
+    type:
+      repeated: false
+      required: false
+      kind: String
+    deprecated: false
+    defaultValue: null
+    description: "支部名称输入参数"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: PeopleBranchIntegralInput.branchIntegral
+  spec:
+    id: "PeopleBranchIntegralInput.branchIntegral"
+    name: "branchIntegral"
+    kind: PeopleBranchIntegralInput
+    type:
+      repeated: false
+      required: false
+      kind: Int
+    deprecated: false
+    defaultValue: null
+    description: "支部积分输入参数"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: BranchIntegralFilter.branchName
+  spec:
+    id: "BranchIntegralFilter.branchName"
+    name: "branchName"
+    kind: BranchIntegralFilter
+    type:
+      repeated: false
+      required: false
+      kind: String
+    deprecated: false
+    defaultValue: null
+    description: "支部名称过滤参数"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: PeopleBranchIntegralFilter.branchName
+  spec:
+    id: "PeopleBranchIntegralFilter.branchName"
+    name: "branchName"
+    kind: PeopleBranchIntegralFilter
+    type:
+      repeated: false
+      required: false
+      kind: String
+    deprecated: false
+    defaultValue: null
+    description: "支部名称过滤参数"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: PeopleBranchIntegralFilter.peopleName
+  spec:
+    id: "PeopleBranchIntegralFilter.peopleName"
+    name: "peopleName"
+    kind: PeopleBranchIntegralFilter
+    type:
+      repeated: false
+      required: false
+      kind: String
+    deprecated: false
+    defaultValue: null
+    description: "姓名过滤参数"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: BranchIntegral.id
+  spec:
+    id: "BranchIntegral.id"
+    name: "id"
+    kind: BranchIntegral
+    type:
+      repeated: false
+      required: false
+      kind: ID
+    deprecated: false
+    defaultValue: null
+    description: "编号"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: BranchIntegral.branchName
+  spec:
+    id: "BranchIntegral.branchName"
+    name: "branchName"
+    kind: BranchIntegral
+    type:
+      repeated: false
+      required: false
+      kind: String
+    deprecated: false
+    defaultValue: null
+    description: "支部名称"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: BranchIntegral.branchIntegral
+  spec:
+    id: "BranchIntegral.branchIntegral"
+    name: "branchIntegral"
+    kind: BranchIntegral
+    type:
+      repeated: false
+      required: false
+      kind: Int
+    deprecated: false
+    defaultValue: null
+    description: "支部积分"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: PeopleBranchIntegral.id
+  spec:
+    id: "PeopleBranchIntegral.id"
+    name: "id"
+    kind: PeopleBranchIntegral
+    type:
+      repeated: false
+      required: false
+      kind: ID
+    deprecated: false
+    defaultValue: null
+    description: "编号"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: PeopleBranchIntegral.peopleName
+  spec:
+    id: "PeopleBranchIntegral.peopleName"
+    name: "peopleName"
+    kind: PeopleBranchIntegral
+    type:
+      repeated: false
+      required: false
+      kind: String
+    deprecated: false
+    defaultValue: null
+    description: "姓名"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: PeopleBranchIntegral.branchName
+  spec:
+    id: "PeopleBranchIntegral.branchName"
+    name: "branchName"
+    kind: PeopleBranchIntegral
+    type:
+      repeated: false
+      required: false
+      kind: String
+    deprecated: false
+    defaultValue: null
+    description: "支部名称"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: PeopleBranchIntegral.branchIntegral
+  spec:
+    id: "PeopleBranchIntegral.branchIntegral"
+    name: "branchIntegral"
+    kind: PeopleBranchIntegral
+    type:
+      repeated: false
+      required: false
+      kind: Int
+    deprecated: false
+    defaultValue: null
+    description: "支部积分"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: PeopleBranchIntegralConnection.totalCount
+  spec:
+    id: "PeopleBranchIntegralConnection.totalCount"
+    name: "totalCount"
+    kind: PeopleBranchIntegralConnection
+    type:
+      repeated: false
+      required: false
+      kind: Int
+    deprecated: false
+    defaultValue: null
+    description: "总数据条数"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: PeopleBranchIntegralConnection.pageSize
+  spec:
+    id: "PeopleBranchIntegralConnection.pageSize"
+    name: "pageSize"
+    kind: PeopleBranchIntegralConnection
+    type:
+      repeated: false
+      required: false
+      kind: Int
+    deprecated: false
+    defaultValue: null
+    description: "每页显示条数"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: PeopleBranchIntegralConnection.totalPage
+  spec:
+    id: "PeopleBranchIntegralConnection.totalPage"
+    name: "totalPage"
+    kind: PeopleBranchIntegralConnection
+    type:
+      repeated: false
+      required: false
+      kind: Int
+    deprecated: false
+    defaultValue: null
+    description: "总页数"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: PeopleBranchIntegralConnection.currentPage
+  spec:
+    id: "PeopleBranchIntegralConnection.currentPage"
+    name: "currentPage"
+    kind: PeopleBranchIntegralConnection
+    type:
+      repeated: false
+      required: false
+      kind: Int
+    deprecated: false
+    defaultValue: null
+    description: "当前页"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: PeopleBranchIntegralConnection.edges
+  spec:
+    id: "PeopleBranchIntegralConnection.edges"
+    name: "edges"
+    kind: PeopleBranchIntegralConnection
+    type:
+      repeated: true
+      required: false
+      kind: PBIntegral
+    deprecated: false
+    defaultValue: null
+    description: "edges"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: PeopleBranchIntegralConnection.pageInfo
+  spec:
+    id: "PeopleBranchIntegralConnection.pageInfo"
+    name: "pageInfo"
+    kind: PeopleBranchIntegralConnection
+    type:
+      repeated: false
+      required: false
+      kind: PBIntegral
+    deprecated: false
+    defaultValue: null
+    description: "页信息"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: PBIntegral.cursor
+  spec:
+    id: "PBIntegral.cursor"
+    name: "cursor"
+    kind: PBIntegral
+    type:
+      repeated: false
+      required: false
+      kind: String
+    deprecated: false
+    defaultValue: null
+    description: "cursor"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: PBIntegral.node
+  spec:
+    id: "PBIntegral.node"
+    name: "node"
+    kind: PBIntegral
+    type:
+      repeated: false
+      required: false
+      kind: PeopleBranchIntegral
+    deprecated: false
+    defaultValue: null
+    description: "node"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: BranchIntegralConnection.totalCount
+  spec:
+    id: "BranchIntegralConnection.totalCount"
+    name: "totalCount"
+    kind: BranchIntegralConnection
+    type:
+      repeated: false
+      required: false
+      kind: Int
+    deprecated: false
+    defaultValue: null
+    description: "总数据条数"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: BranchIntegralConnection.pageSize
+  spec:
+    id: "BranchIntegralConnection.pageSize"
+    name: "pageSize"
+    kind: BranchIntegralConnection
+    type:
+      repeated: false
+      required: false
+      kind: Int
+    deprecated: false
+    defaultValue: null
+    description: "每页显示条数"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: BranchIntegralConnection.totalPage
+  spec:
+    id: "BranchIntegralConnection.totalPage"
+    name: "totalPage"
+    kind: BranchIntegralConnection
+    type:
+      repeated: false
+      required: false
+      kind: Int
+    deprecated: false
+    defaultValue: null
+    description: "总页数"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: BranchIntegralConnection.currentPage
+  spec:
+    id: "BranchIntegralConnection.currentPage"
+    name: "currentPage"
+    kind: BranchIntegralConnection
+    type:
+      repeated: false
+      required: false
+      kind: Int
+    deprecated: false
+    defaultValue: null
+    description: "当前页"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: BranchIntegralConnection.edges
+  spec:
+    id: "BranchIntegralConnection.edges"
+    name: "edges"
+    kind: BranchIntegralConnection
+    type:
+      repeated: true
+      required: false
+      kind: BIntegralEdge
+    deprecated: false
+    defaultValue: null
+    description: "edges"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: BranchIntegralConnection.pageInfo
+  spec:
+    id: "BranchIntegralConnection.pageInfo"
+    name: "pageInfo"
+    kind: BranchIntegralConnection
+    type:
+      repeated: false
+      required: false
+      kind: PageInfo
+    deprecated: false
+    defaultValue: null
+    description: "页信息"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: BIntegralEdge.cursor
+  spec:
+    id: "BIntegralEdge.cursor"
+    name: "cursor"
+    kind: BIntegralEdge
+    type:
+      repeated: false
+      required: false
+      kind: String
+    deprecated: false
+    defaultValue: null
+    description: "cursor"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: BIntegralEdge.node
+  spec:
+    id: "BIntegralEdge.node"
+    name: "node"
+    kind: BIntegralEdge
+    type:
+      repeated: false
+      required: false
+      kind: BranchIntegral
+    deprecated: false
+    defaultValue: null
+    description: "node"
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: Query.findCMSBranchIntegralById
+  spec:
+    id: "Query.findCMSBranchIntegralById"
+    name: "findCMSBranchIntegralById"
+    kind: Query
+    type:
+      repeated: false
+      required: false
+      kind: BranchIntegral
+    deprecated: false
+    defaultValue: null
+    description: "根据id查询支部积分"
+    delegate: party.default
+    arguments:
+      - id: "id"
+        name: "id"
+        type:
+          repeated: false
+          required: true
+          kind: ID
+        description: "id"
+        defaultValue: null
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: Query.findCMSPeopleBranchIntegralPage
+  spec:
+    id: "Query.findCMSPeopleBranchIntegralPage"
+    name: "findCMSPeopleBranchIntegralPage"
+    kind: Query
+    type:
+      repeated: false
+      required: false
+      kind: PeopleBranchIntegralConnection
+    deprecated: false
+    defaultValue: null
+    description: "分页查询"
+    delegate: party.default
+    arguments:
+      - id: "filter"
+        name: "filter"
+        type:
+          repeated: false
+          required: false
+          kind: PeopleBranchIntegralFilter
+        description: "过滤"
+        defaultValue: null
+      - id: "page"
+        name: "page"
+        type:
+          repeated: false
+          required: false
+          kind: Int
+        description: "page"
+        defaultValue: null
+      - id: "pageSize"
+        name: "pageSize"
+        type:
+          repeated: false
+          required: false
+          kind: Int
+        description: "pageSize"
+        defaultValue: null
+      - id: "orderBy"
+        name: "orderBy"
+        type:
+          repeated: false
+          required: false
+          kind: OrderBy
+        description: "orderBy"
+        defaultValue: null
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: Query.findCMSPeopleBranchIntegralById
+  spec:
+    id: "Query.findCMSPeopleBranchIntegralById"
+    name: "findCMSPeopleBranchIntegralById"
+    kind: Query
+    type:
+      repeated: false
+      required: false
+      kind: PeopleBranchIntegral
+    deprecated: false
+    defaultValue: null
+    description: "根据id查询支部积分"
+    delegate: party.default
+    arguments:
+      - id: "id"
+        name: "id"
+        type:
+          repeated: false
+          required: true
+          kind: ID
+        description: "根据id查询人员支部积分"
+        defaultValue: null
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: Query.findCMSBranchIntegralPage
+  spec:
+    id: "Query.findCMSBranchIntegralPage"
+    name: "findCMSBranchIntegralPage"
+    kind: Query
+    type:
+      repeated: false
+      required: false
+      kind: BranchIntegralConnection
+    deprecated: false
+    defaultValue: null
+    description: "分页查询"
+    delegate: party.default
+    arguments:
+      - id: "filter"
+        name: "filter"
+        type:
+          repeated: false
+          required: false
+          kind: BranchIntegralFilter
+        description: "过滤"
+        defaultValue: null
+      - id: "page"
+        name: "page"
+        type:
+          repeated: false
+          required: false
+          kind: Int
+        description: "page"
+        defaultValue: null
+      - id: "pageSize"
+        name: "pageSize"
+        type:
+          repeated: false
+          required: false
+          kind: Int
+        description: "pageSize"
+        defaultValue: null
+      - id: "orderBy"
+        name: "orderBy"
+        type:
+          repeated: false
+          required: false
+          kind: OrderBy
+        description: "orderBy"
+        defaultValue: null
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: Mutation.createCMSBranchIntegral
+  spec:
+    id: "Mutation.createCMSBranchIntegral"
+    name: "createCMSBranchIntegral"
+    kind: Mutation
+    type:
+      repeated: false
+      required: false
+      kind: BranchIntegral
+    deprecated: false
+    defaultValue: null
+    description: "保存支部积分"
+    delegate: party.default
+    arguments:
+      - id: "input"
+        name: "input"
+        type:
+          repeated: false
+          required: false
+          kind: BranchIntegralInput
+        description: "保存支部积分"
+        defaultValue: null
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: Mutation.deleteCMSBranchIntegral
+  spec:
+    id: "Mutation.deleteCMSBranchIntegral"
+    name: "deleteCMSBranchIntegral"
+    kind: Mutation
+    type:
+      repeated: false
+      required: false
+      kind: Boolean
+    deprecated: false
+    defaultValue: null
+    description: "删除支部积分"
+    delegate: party.default
+    arguments:
+      - id: "id"
+        name: "id"
+        type:
+          repeated: false
+          required: true
+          kind: ID
+        description: "删除支部积分"
+        defaultValue: null
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: Mutation.updateCMSBranchIntegral
+  spec:
+    id: "Mutation.updateCMSBranchIntegral"
+    name: "updateCMSBranchIntegral"
+    kind: Mutation
+    type:
+      repeated: false
+      required: false
+      kind: BranchIntegral
+    deprecated: false
+    defaultValue: null
+    description: "修改支部积分"
+    delegate: party.default
+    arguments:
+      - id: "id"
+        name: "id"
+        type:
+          repeated: false
+          required: true
+          kind: ID
+        description: "输入id"
+        defaultValue: null
+      - id: "merge"
+        name: "merge"
+        type:
+          repeated: false
+          required: false
+          kind: Boolean
+        description: "merge"
+        defaultValue: null
+      - id: "input"
+        name: "input"
+        type:
+          repeated: false
+          required: false
+          kind: BranchIntegralInput
+        description: "input"
+        defaultValue: null
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: Mutation.createCMSPeopleBranchIntegral
+  spec:
+    id: "Mutation.createCMSPeopleBranchIntegral"
+    name: "createCMSPeopleBranchIntegral"
+    kind: Mutation
+    type:
+      repeated: false
+      required: false
+      kind: PeopleBranchIntegral
+    deprecated: false
+    defaultValue: null
+    description: "保存人员支部积分"
+    delegate: party.default
+    arguments:
+      - id: "input"
+        name: "input"
+        type:
+          repeated: false
+          required: false
+          kind: PeopleBranchIntegralInput
+        description: "保存人员支部积分"
+        defaultValue: null
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: Mutation.deleteCMSPeopleBranchIntegral
+  spec:
+    id: "Mutation.deleteCMSPeopleBranchIntegral"
+    name: "deleteCMSPeopleBranchIntegral"
+    kind: Mutation
+    type:
+      repeated: false
+      required: false
+      kind: Boolean
+    deprecated: false
+    defaultValue: null
+    description: "删除人员支部积分"
+    delegate: party.default
+    arguments:
+      - id: "id"
+        name: "id"
+        type:
+          repeated: false
+          required: true
+          kind: ID
+        description: "删除人员支部积分"
+        defaultValue: null
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: Mutation.updateCMSPeopleBranchIntegral
+  spec:
+    id: "Mutation.updateCMSPeopleBranchIntegral"
+    name: "updateCMSPeopleBranchIntegral"
+    kind: Mutation
+    type:
+      repeated: false
+      required: false
+      kind: Boolean
+    deprecated: false
+    defaultValue: null
+    description: "修改人员支部积分"
+    delegate: party.default
+    arguments:
+      - id: "id"
+        name: "id"
+        type:
+          repeated: false
+          required: true
+          kind: ID
+        description: "id"
+        defaultValue: null
+      - id: "merge"
+        name: "merge"
+        type:
+          repeated: false
+          required: false
+          kind: Boolean
+        description: "merge"
+        defaultValue: null
+      - id: "input"
+        name: "input"
+        type:
+          repeated: false
+          required: false
+          kind: PeopleBranchIntegralInput
+        description: "input"
+        defaultValue: null

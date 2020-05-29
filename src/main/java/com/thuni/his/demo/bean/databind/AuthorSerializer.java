@@ -7,9 +7,7 @@ import com.thuni.his.demo.bean.Author;
 
 import java.io.IOException;
 
-/**
- * @author limaofeng
- */
+
 public class AuthorSerializer extends JsonSerializer<Author> {
 
     @Override
@@ -19,6 +17,5 @@ public class AuthorSerializer extends JsonSerializer<Author> {
         } else {
             jgen.writeNumber(department.getId());
         }
-
     }
 }

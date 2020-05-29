@@ -9,7 +9,7 @@ import org.jfantasy.framework.util.common.StringUtil;
 import java.io.IOException;
 
 /**
- * @author limaofeng
+ * 转JSON处理
  */
 public class AuthorDeserializer extends JsonDeserializer<Author> {
 
