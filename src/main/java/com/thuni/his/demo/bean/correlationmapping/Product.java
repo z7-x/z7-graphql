@@ -18,6 +18,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+//@Cacheable(true) //开启二级缓存
 @Table(name = "ts_product")
 //默认使用SINGLE_TABLE策略生成表,一张表维护所有的父类和子类的数据
 //在表中添加一个鉴别器列,用来区分数据的类型

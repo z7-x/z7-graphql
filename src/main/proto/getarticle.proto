@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+
+import "google/protobuf/timestamp.proto";
+package net.whir.hos.cms;
+
+//z7
+service GetArticleService {
+    //新增
+    rpc addArticle (ArticleRequest) returns (ArticleResponse) {
+    }
+    //修改
+    rpc updateArticle (UpdateArticleRequest) returns (UpdateArticleResponse) {
+    }
+    //删除
+    rpc deleteArticle (DelArticleRequest) returns (DelArticleResponse) {
+    }
+
+}
+
+message ArticleRequest{
+    Article article = 1;
+ }
+
+ message ArticleResponse{
+     //文章主表id
+     int64 id = 1;
+}
+
+message Article{
+    int64 id = 1;
+    string url = 2;
+    repeated FileObject attachments =3;//附件
+    string author = 4;
+    ArticleCategory category = 5;
+    FileObject cover = 6;
+    google.protobuf.Timestamp lastCommentTime = 7;
+    ArticleStatus status = 8;
+    string summary = 9 ;
+    string title = 10;//学习主题
+    ArticleType type = 11;
+    string learnRequirement = 12;//学习要求
+    string creator = 13;//创建人
+}
+
+enum ArticleStatus{
+    // 草稿
+    draft = 0;
+    // 发布
+    published = 1;
+}
+
+enum ArticleType{
+    //普通文章
+    text = 0;
+    //链接文章
+    link = 1;
+    //文件文章
+    file = 2;
+}
+
+enum ArticleCategory{
+    information = 0;
+    circle = 1;
+    blog = 2;
+    section = 3;
+}
+
+message FileObject {
+    string id = 1;
+    string md5 = 2;
+    string name = 3;
+    string path = 4;
+    string mimeType = 5;
+    uint64 length = 6;
+    string destination = 7;
+    google.protobuf.Timestamp createdAt = 8;
+    google.protobuf.Timestamp updatedAt = 9;
+}
+
+//修改
+message UpdateArticleRequest{
+    int64 articleId = 1;//传入学习主题主键id
+    repeated FileObject attachments =2;//附件
+    string title = 3;//学习主题
+    string learnRequirement = 4;//学习要求
+    string creator = 5;//创建人
+}
+
+message UpdateArticleResponse{
+}
+
+
+//删除
+message DelArticleRequest{
+    int64 articleId = 1;
+}
+
+message DelArticleResponse{
+}
