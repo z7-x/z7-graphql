@@ -11,11 +11,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PeopleService {
+//    ConcurrentHashMap concurrentHashMap =  new ConcurrentHashMap();
+//
+//        concurrentHashMap.clear();
 
     @Autowired
    private PeopleDao peopleDao;
