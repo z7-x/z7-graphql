@@ -25,6 +25,6 @@ public class Authority extends BaseBusEntity {
     private String name;
 
     @ManyToMany(mappedBy = "authorityList")
-    private List<User> userList;
+    private List<Users> userList;
 
 }

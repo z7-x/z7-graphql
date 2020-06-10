@@ -1,6 +1,6 @@
 package com.thuni.his.demo.graphql.types;
 
-import com.thuni.his.demo.bean.User;
+import com.thuni.his.demo.bean.Users;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,8 +18,8 @@ public class UserConnection extends BaseConnection<UserConnection.UserEdge> {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class UserEdge implements Edge<User> {
+    public static class UserEdge implements Edge<Users> {
         private String cursor;
-        private User node;
+        private Users node;
     }
 }

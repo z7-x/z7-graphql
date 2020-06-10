@@ -21,7 +21,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 @Slf4j
 @Configuration
-@ComponentScan("com.thuni.his.demo")
+@ComponentScan("com.thuni.his.*")
 @EntityScan({
     "com.thuni.his.*.bean",
 })

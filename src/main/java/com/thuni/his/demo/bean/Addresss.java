@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "ts_address")
-public class Address  extends BaseBusEntity {
+public class Addresss extends BaseBusEntity {
 
     /**
      * 主键编号

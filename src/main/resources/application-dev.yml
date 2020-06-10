@@ -3,7 +3,7 @@ spring:
     name: server
   datasource:
     name: datasource
-    url: jdbc:mysql://127.0.0.1:3306/suty?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://127.0.0.1:3306/study-z7?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
     username: root
     password: root
     druid:

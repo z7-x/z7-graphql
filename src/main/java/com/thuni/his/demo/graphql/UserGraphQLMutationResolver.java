@@ -2,7 +2,7 @@ package com.thuni.his.demo.graphql;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.thuni.his.demo.bean.Authority;
-import com.thuni.his.demo.bean.User;
+import com.thuni.his.demo.bean.Users;
 import com.thuni.his.demo.graphql.converters.UserConverter;
 import com.thuni.his.demo.graphql.inputs.UserAuthorityInput;
 import com.thuni.his.demo.service.AuthorityService;
@@ -22,7 +22,7 @@ public class UserGraphQLMutationResolver implements GraphQLMutationResolver {
     @Autowired
     private UserConverter userConverter;
 
-    public User createUser(User user) {
+    public Users createUser(Users user) {
         return userService.save(user);
     }
 
@@ -35,8 +35,8 @@ public class UserGraphQLMutationResolver implements GraphQLMutationResolver {
         return authorityService.updateAuthority(authority,merge);
     }
 
-    public User createMicroserviceUserAuthority(UserAuthorityInput userAuthorityInput){
-        User user = userConverter.toUser(userAuthorityInput);
+    public Users createMicroserviceUserAuthority(UserAuthorityInput userAuthorityInput){
+        Users user = userConverter.toUser(userAuthorityInput);
         return userService.saveUserAuthority(user);
     }
 

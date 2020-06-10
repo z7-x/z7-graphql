@@ -49,5 +49,5 @@ public class People  extends BaseBusEntity {
      */
     @OneToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "addressId",referencedColumnName="id",unique = true)
-    private Address address;
+    private Addresss address;
 }

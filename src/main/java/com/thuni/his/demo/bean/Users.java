@@ -22,7 +22,7 @@ import java.util.List;
 @Entity
 @Table(name = "ts_user")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class User extends BaseBusEntity {
+public class Users extends BaseBusEntity {
     @Id
     @Column(name = "ID", nullable = false, updatable = false, precision = 22)
     @GeneratedValue(generator = "fantasy-sequence")
@@ -51,4 +51,6 @@ public class User extends BaseBusEntity {
     @JoinTable(name = "ts_user_authority",joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id") ,
             inverseJoinColumns = @JoinColumn(name = "authority_id",referencedColumnName = "id"))
     private List<Authority> authorityList;
+
+
 }

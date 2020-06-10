@@ -1,7 +1,7 @@
 package com.thuni.his.demo.service;
 
 import com.thuni.his.demo.bean.Authority;
-import com.thuni.his.demo.bean.User;
+import com.thuni.his.demo.bean.Users;
 import com.thuni.his.demo.dao.AuthorityDao;
 import com.thuni.his.demo.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class AuthorityService {
      */
     public Authority saveAuthorityUser(Authority authority){
         Authority save = authorityDao.save(authority);
-        List<User> userList = userDao.saveAll(save.getUserList());
+        List<Users> userList = userDao.saveAll(save.getUserList());
         save.setUserList(userList);
         return save;
     }

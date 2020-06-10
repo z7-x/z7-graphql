@@ -1,6 +1,6 @@
 package com.thuni.his.demo.graphql.converters;
 
-import com.thuni.his.demo.bean.User;
+import com.thuni.his.demo.bean.Users;
 import com.thuni.his.demo.graphql.inputs.UserAuthorityInput;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
@@ -13,7 +13,7 @@ public interface UserConverter {
     UserConverter INSTANCE = Mappers.getMapper(UserConverter.class);
 
 
-    List<User> toUser(List<UserAuthorityInput> input);
+    List<Users> toUser(List<UserAuthorityInput> input);
 
 
     @Mappings({
@@ -21,6 +21,6 @@ public interface UserConverter {
             @Mapping(source = "input.password", target = "password"),
             @Mapping(source = "input.authorityList", target = "authorityList")
     })
-    User toUser(UserAuthorityInput input);
+    Users toUser(UserAuthorityInput input);
 
 }
