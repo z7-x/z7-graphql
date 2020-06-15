@@ -4,6 +4,7 @@ import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.thuni.his.business.bean.RoleScope;
 import com.thuni.his.business.graphql.inputs.RoleScopeFilter;
 import com.thuni.his.business.graphql.types.RoleScopeConnection;
+import com.thuni.his.business.service.OrganizationService;
 import com.thuni.his.business.service.RoleScopeService;
 import org.jfantasy.framework.dao.OrderBy;
 import org.jfantasy.framework.dao.Pager;
@@ -20,6 +21,8 @@ public class BusinessGraphQLQueryResolver implements GraphQLQueryResolver {
 
     @Autowired
     private RoleScopeService roleScopeService;
+    @Autowired
+    private OrganizationService organizationService;
 
     public List<RoleScope> findRoleScopes(){
         return roleScopeService.findRoleScopes();
@@ -30,4 +33,6 @@ public class BusinessGraphQLQueryResolver implements GraphQLQueryResolver {
         filter = ObjectUtil.defaultValue(filter,new RoleScopeFilter());
        return Kit.connection(roleScopeService.findPages(pager,filter.build()),RoleScopeConnection.class);
     }
+
+
 }

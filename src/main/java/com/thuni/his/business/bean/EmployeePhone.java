@@ -22,8 +22,7 @@ public class EmployeePhone extends BaseBusEntity {
 
     @Id
     @Column(name = "ID", precision = 22)
-    @GeneratedValue(generator = "org_employee_phone_gen")
-    @TableGenerator(name = "org_employee_phone_gen", table = "sys_sequence", pkColumnName = "gen_name", pkColumnValue = "org_employee_phone:id", valueColumnName = "gen_value")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "IS_PRIMARY", nullable = false)

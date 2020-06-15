@@ -1,12 +1,14 @@
 package com.thuni.his.business.bean;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.thuni.his.demo.bean.Addresss;
+import com.thuni.his.system.bean.Address;
 import lombok.*;
+import org.jfantasy.framework.dao.BaseBusEntity;
+
 import javax.persistence.*;
 
 /**
- * 员工地址信息
+ * 地址信息
  */
 @Getter
 @Setter
@@ -16,7 +18,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "ORG_EMPLOYEE_ADDRESS")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "employee"})
-public class EmployeeAddress {
+public class EmployeeAddress extends BaseBusEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
@@ -31,7 +33,7 @@ public class EmployeeAddress {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "ADDRESS_ID", foreignKey = @ForeignKey(name = "ORG_EMPLOYEE_ADDRESS_VID"), nullable = false, updatable = false)
-    private Addresss address;
+    private Address address;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EMPLOYEE_ID", foreignKey = @ForeignKey(name = "ORG_EMPLOYEE_ADDRESS_EID"), nullable = false, updatable = false)

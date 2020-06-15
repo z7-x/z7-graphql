@@ -96,7 +96,7 @@ public class Employee extends BaseBusEntity {
     private List<EmployeePhone> phones;
 
     /**
-     * 部门
+     * 职位
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade = CascadeType.REMOVE)
     private List<EmployeePosition> employeePositions;

@@ -55,7 +55,7 @@ public class Role extends BaseBusEntity {
 
     /**
      * 是否启用 0-禁用 1-启用
-     */Z
+     */
     @Column(name = "ENABLED")
     private Boolean enabled;
     /**

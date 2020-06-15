@@ -7,10 +7,7 @@ import org.jfantasy.framework.dao.BaseBusEntity;
 import javax.persistence.*;
 
 /**
- * @author limaofeng
- * @version V1.0
- * @Description: TODO
- * @date 2019/11/1 4:51 下午
+ * 地址表
  */
 @Getter
 @Setter

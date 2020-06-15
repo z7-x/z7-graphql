@@ -45,7 +45,7 @@ public class DepartmentType {
     private String code;
 
     /**
-     * 是否支持多部门
+     *
      */
     @Column(name = "MULTI_SECTORAL")
     private Boolean multiSectoral;

@@ -94,14 +94,6 @@ public class User extends BaseBusEntity {
      */
     @Column(name = "LAST_LOGIN_TIME")
     private Date lastLoginTime;
-    /**
-     * 用户对应的角色
-     */
-    @JsonDeserialize(using = RolesDeserializer.class)
-    @ManyToMany(targetEntity = Role.class, fetch = FetchType.LAZY)
-    @JoinTable(name = "AUTH_ROLE_USER", joinColumns = @JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "FK_AUTH_ROLE_USER_USER")), inverseJoinColumns = @JoinColumn(name = "ROLE_CODE"), foreignKey = @ForeignKey(name = "FK_ROLE_USER_UID"))
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private List<Role> roles;
 
     /**
      * 管理人员
@@ -148,4 +140,13 @@ public class User extends BaseBusEntity {
         }
         return ClassUtil.newInstance(toClass, value);
     }
+
+    /**
+     * 用户对应的角色
+     */
+    @JsonDeserialize(using = RolesDeserializer.class)
+    @ManyToMany(targetEntity = Role.class, fetch = FetchType.LAZY)
+    @JoinTable(name = "AUTH_ROLE_USER", joinColumns = @JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "FK_AUTH_ROLE_USER_USER")), inverseJoinColumns = @JoinColumn(name = "ROLE_CODE"), foreignKey = @ForeignKey(name = "FK_ROLE_USER_UID"))
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private List<Role> roles;
 }

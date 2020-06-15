@@ -8,6 +8,9 @@ import org.jfantasy.framework.dao.BaseBusEntity;
 import javax.persistence.*;
 
 
+/**
+ * 邮件表
+ */
 @Getter
 @Setter
 @Builder

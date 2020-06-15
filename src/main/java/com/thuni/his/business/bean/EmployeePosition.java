@@ -61,6 +61,9 @@ public class EmployeePosition extends BaseBusEntity {
     @JoinColumn(name = "ORGANIZATION_ID", foreignKey = @ForeignKey(name = "FK_EMPLOYEE_POSITION_OID"), updatable = false, nullable = false)
     private Organization organization;
 
+    /**
+     * 组织员工
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORGANIZATIONEMPLOYEE_ID", foreignKey = @ForeignKey(name = "FK_ORGANIZATION_EMPLOYEE_TID"), updatable = false, nullable = false)
     private OrganizationEmployee status;

@@ -1,7 +1,423 @@
-#extend type Query {
-#
-#}
-#
-#extend type Mutation {
-#
-#}
+extend type Query {
+    # 查询 权限范围集合列表
+    findRoleScopes:[RoleScope]
+    # 查询 权限范围分页列表
+    findRoleScopePage(filter:RoleScopeFilter,page:Int = 1,pageSize:Int = 15,orderBy:OrderBy):RoleScopeConnection
+}
+
+extend type Mutation {
+    # 新增/更新 权限范围
+    createAndUpdateRoleScope(input:RoleScopeInput):RoleScope
+    # 删除 权限范围
+    deleteRoleScope(id:ID!):Boolean
+    # 新增/更新 组织
+    createAndUpdateOrganization(input:OrganizationInput):Organization
+    # 删除 组织
+    deleteOrganization(id:ID!):Boolean
+}
+input OrganizationInput{
+    # 组织编号
+    id:ID
+    # 机构简写
+    logoGram:String
+    # 机构名称
+    name:String
+    # 排序字段
+    sort:Int
+    # 机构描述信息
+    description:String
+    # 上级机构
+    parent:ID
+    # 下属机构
+    children:ID
+    # 部门类型
+    departmentTypes:[ID]
+    # 用户组范围
+    employeeGroupScopes:[ID]
+    # 是否支持多部门
+    multiSectoral:Boolean
+    # 支持最多部门数
+    multiSectoralNumber:Int
+}
+
+# 组织
+type Organization{
+    # 组织编号
+    id:ID
+    # 机构简写
+    logoGram:String
+    # 机构名称
+    name:String
+    # 排序字段
+    sort:Int
+    # 机构描述信息
+    description:String
+    # 上级机构
+    parent:Organization
+    # 下属机构
+    children:Organization
+    # 部门类型
+    departmentTypes:[DepartmentType]
+    # 用户组范围
+    employeeGroupScopes:[EmployeeGroupScope]
+    # 是否支持多部门
+    multiSectoral:Boolean
+    # 支持最多部门数
+    multiSectoralNumber:Int
+}
+
+# 部门类型
+type DepartmentType{
+    # 编号
+    id:ID
+    # 名称
+    name:String
+    # 组织
+    organization:Organization
+    # 编码
+    code:String
+    # 是否支持多部门
+    multiSectoral:Boolean
+    # 支持最多部门数
+    multiSectoralNumber:Int
+}
+
+# 用户组范围
+type EmployeeGroupScope{
+    # 编号
+    id:ID
+    # 名称
+    name:String
+    # 用户组范围
+    employeeGroups:[EmployeeGroup]
+    # 所属组织
+    organization:Organization
+}
+
+# 用户组
+type EmployeeGroup{
+    # 编号
+    id:ID
+    # 名称
+    name:String
+    # 是否启用
+    enabled:Boolean
+    # 描述
+    description:String
+    # 使用范围
+    scope:EmployeeGroupScope
+    # 群组成员
+    employees:[Employee]
+}
+
+# 员工
+type Employee{
+    # 编号
+    id:ID
+    # 名称
+    name:String
+    # 工号
+    jobNumber:String
+    # 用户标签，用于筛选用户
+    tags:[String]
+    # 生日
+    birthday:Date
+    # 性别
+    sex:Sex
+    # 移动电话
+    mobile:String
+    # 固定电话
+    tel:String
+    # 邮箱E-mail
+    email:String
+    # 地址列表
+    addresses:[EmployeeAddress]
+    # 邮箱列表
+    emails:[EmployeeEmail]
+    # 电话列表
+    phones:[EmployeePhone]
+    # 职位
+    employeePositions:[EmployeePosition]
+    # 链接到的账户
+    links:[EmployeeLink]
+    # 用户
+    user:User
+}
+
+# 链接账户
+type EmployeeLink{
+    employee:Employee
+    linkId:String
+}
+
+# 员工职位关联表
+type EmployeePosition{
+    # 编号
+    id:ID
+    # 是否是主部门
+    primary:Boolean
+    # 员工
+    employee:Employee
+    # 职位
+    position:Position
+    # 所在部门
+    department:Department
+    # 所在组织
+    organization:Organization
+    # 组织员工
+    status:OrganizationEmployee
+}
+
+# 组织员工表
+type OrganizationEmployee{
+    # 编号
+    id:ID
+    # 组织
+    organization:Organization
+    # 员工
+    employee:Employee
+    # 组织员工状态
+    status:OrganizationEmployeeStatus
+    # 主部门
+    department:Department
+    # 主职务
+    position:Position
+    # 员工职务
+    positions:[EmployeePosition]
+}
+
+# 组织员工状态表
+type OrganizationEmployeeStatus{
+    #ID
+    id: ID
+    #状态编码
+    code: String
+    #状态
+    name:String
+    #所属组织
+    organization: Organization
+}
+
+# 职位表
+type Position{
+    # 职位
+    id: ID
+    # 职位名称
+    name:String
+    # 职位描述信息
+    description: String
+    # 职位拥有的角色
+    roles: [Role]
+    # 所属部门
+    department: Department
+    # 所属组织
+    organization:Organization
+}
+
+type Department{
+    # 主键id
+    id:ID
+    # 部门简写
+    sn: String
+    # 部门名称
+    name: String
+    # 部门全称 格式如: 销售管理中心.售前支持
+    fullName: String
+    # 部门描述信息
+    description: String
+    # 部门包含的职务
+    jobs: [Job]
+    # 包含所有父级节点的ID
+    path: String
+    # 部门包含的职位
+    positions: [Position]
+    # 排序字段
+    sort: Int
+    # 上级机构
+    parent: Department
+    # 下属部门
+    children: [Department]
+    # 部门员工
+    employees: [Employee]
+    # 组织机构
+    organization: Organization
+    # 所有父级部门的集合
+    parents: [Department]
+    # 部门类型
+    type: DepartmentType
+    #部门属性
+    attributes:[DepartmentAttribute]
+    #是否是主部门
+    isPrimary(employee: ID!): Boolean
+}
+
+#部门属性
+type DepartmentAttribute{
+    #属性名
+    attributeName:String
+    #属性值
+    attributeValue:String
+    # 描述
+    description: String
+}
+
+# 权限
+type Permission {
+    id: ID
+    # 权限名称
+    name: String
+    # 描述
+    description: String
+    # 是否启用
+    enabled: Boolean
+    # 资源类型
+    resourceType: String
+    # 类型
+    category: PermissionCategory
+}
+
+enum PermissionCategory {
+    universal,
+    resource
+}
+
+# 职务
+type Job {
+    # 职务
+    id: ID
+    # 职务名称
+    name:String
+    # 职务描述信息
+    description: String
+}
+
+# 角色表
+type Role{
+    # 编码
+    id: ID
+    # 名称
+    name: String
+    # 是否启用
+    enabled: Boolean
+    # 描述
+    description: String
+}
+
+# 员工地址关联表
+type EmployeeAddress{
+    # 编号
+    id:ID
+    # 是否是主地址
+    primary:Boolean
+    # 标签
+    label:String
+    # 地址
+    address:Address
+    # 员工
+    employee:Employee
+}
+
+# 员工邮箱关联表
+type EmployeeEmail{
+    # 编号
+    id:ID
+    # 是否是主邮箱
+    primary:Boolean
+    # 标签
+    label:String
+    # 邮箱
+    email:Email
+    # 员工
+    employee:Employee
+}
+
+# 邮箱
+type Email{
+    # 编号
+    id:ID
+    # 状态
+    status:EmailStatus
+    # 邮箱
+    email:String
+}
+
+# 员工电话关联表
+type EmployeePhone{
+    # 编号
+    id:ID
+    # 是否是主电话
+    primary:Boolean
+    # 标签
+    label:String
+    # 邮箱
+    phone:Phone
+    # 员工
+    employee:Employee
+}
+
+# 电话
+type Phone{
+    # 编号
+    id:ID
+    # 状态
+    status:PhoneStatus
+    # 电话
+    phone:String
+}
+
+enum PhoneStatus{
+    #未验证
+    Unverified
+}
+
+enum EmailStatus{
+    #未验证
+    Unverified
+}
+enum Sex{
+    male,female,unknown
+}
+
+input RoleScopeFilter{
+    # 权限名
+    name:String
+    # 是否启用
+    enabled:Boolean
+}
+
+type RoleScopeConnection{
+    # 总数据条数
+    totalCount: Int
+    # 每页显示条数
+    pageSize: Int
+    # 总页数
+    totalPage: Int
+    # 当前页
+    currentPage: Int
+    edges: [RoleScopeEdge]
+    pageInfo: PageInfo
+}
+
+type RoleScopeEdge{
+    cursor:String
+    node:RoleScope
+}
+
+input RoleScopeInput{
+    # 权限范围编号
+    id:ID
+    # 权限名
+    name:String
+    # 是否启用
+    enabled:Boolean
+}
+
+# 权限范围
+type RoleScope{
+    # 权限范围编号
+    id:ID
+    # 权限名
+    name:String
+    # 是否启用
+    enabled:Boolean
+}
