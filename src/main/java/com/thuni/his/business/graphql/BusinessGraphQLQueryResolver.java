@@ -33,6 +33,4 @@ public class BusinessGraphQLQueryResolver implements GraphQLQueryResolver {
         filter = ObjectUtil.defaultValue(filter,new RoleScopeFilter());
        return Kit.connection(roleScopeService.findPages(pager,filter.build()),RoleScopeConnection.class);
     }
-
-
 }

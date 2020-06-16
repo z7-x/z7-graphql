@@ -13,7 +13,6 @@ import java.util.List;
  *
  */
 @Data
-@EqualsAndHashCode(of = "id")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

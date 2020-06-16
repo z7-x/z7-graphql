@@ -18,12 +18,10 @@ import java.util.List;
 /**
  * 组织机构
  */
-@Setter
-@Getter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
 @Table(name = "ORG_ORGANIZATION")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "children", "employees"})
@@ -55,22 +53,6 @@ public class Organization extends BaseBusEntity {
     @Column(name = "DESCRIPTION", length = 150)
     private String description;
     /**
-     * 上级机构
-     */
-    @JsonProperty("parent_id")
-    @JsonSerialize(using = OrgSerializer.class)
-    @JsonDeserialize(using = OrgDeserializer.class)
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "PID", foreignKey = @ForeignKey(name = "FK_AUTH_ORGANIZATION_PID"))
-    private Organization parent;
-    /**
-     * 下属机构
-     */
-    @JsonInclude(content = JsonInclude.Include.NON_NULL)
-    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @OrderBy("sort ASC")
-    private List<Organization> children;
-    /**
      * 部门类型
      */
 
@@ -94,4 +76,15 @@ public class Organization extends BaseBusEntity {
      */
     @Column(name = "MULTI_SECTORAL_NUMBER")
     private Long multiSectoralNumber;
+    /**
+     * 上级机构
+     */
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "PID", foreignKey = @ForeignKey(name = "FK_AUTH_ORGANIZATION_PID"))
+    private Organization parent;
+    /**
+     * 下属机构
+     */
+    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Organization> children;
 }

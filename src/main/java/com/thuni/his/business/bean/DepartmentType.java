@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 /**
- * 部门类型
+ * 组织类型
  */
 @Data
 @Builder
@@ -45,7 +45,7 @@ public class DepartmentType {
     private String code;
 
     /**
-     *
+     * 多部门
      */
     @Column(name = "MULTI_SECTORAL")
     private Boolean multiSectoral;

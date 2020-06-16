@@ -14,7 +14,24 @@ extend type Mutation {
     createAndUpdateOrganization(input:OrganizationInput):Organization
     # 删除 组织
     deleteOrganization(id:ID!):Boolean
+    # 新增/更新 组织类型
+    createAndUpdateDepartmentType(input:DepartmentTypeInput):DepartmentType
 }
+
+input  DepartmentTypeInput{
+    # 编号
+    id:ID
+    # 名称
+    name:String
+    # 组织
+    organization:OrganizationInput
+    # 编码
+    code:String
+    # 最大兼岗人数
+    andPost:Int
+    multiSectoral:Boolean
+}
+
 input OrganizationInput{
     # 组织编号
     id:ID
@@ -55,7 +72,7 @@ type Organization{
     # 上级机构
     parent:Organization
     # 下属机构
-    children:Organization
+    children:[Organization]
     # 部门类型
     departmentTypes:[DepartmentType]
     # 用户组范围
@@ -76,10 +93,9 @@ type DepartmentType{
     organization:Organization
     # 编码
     code:String
-    # 是否支持多部门
+    # 最大兼岗人数
+    andPost:Int
     multiSectoral:Boolean
-    # 支持最多部门数
-    multiSectoralNumber:Int
 }
 
 # 用户组范围
@@ -137,11 +153,20 @@ type Employee{
     # 电话列表
     phones:[EmployeePhone]
     # 职位
-    employeePositions:[EmployeePosition]
+#    employeePositions:[EmployeePosition]
     # 链接到的账户
     links:[EmployeeLink]
-    # 用户
-    user:User
+    # 管理用户
+#    user:User
+}
+
+
+type User {
+    id:ID
+    #登录名
+    username:String
+    #登录密码
+    password:String
 }
 
 # 链接账户
@@ -150,41 +175,8 @@ type EmployeeLink{
     linkId:String
 }
 
-# 员工职位关联表
-type EmployeePosition{
-    # 编号
-    id:ID
-    # 是否是主部门
-    primary:Boolean
-    # 员工
-    employee:Employee
-    # 职位
-    position:Position
-    # 所在部门
-    department:Department
-    # 所在组织
-    organization:Organization
-    # 组织员工
-    status:OrganizationEmployee
-}
 
-# 组织员工表
-type OrganizationEmployee{
-    # 编号
-    id:ID
-    # 组织
-    organization:Organization
-    # 员工
-    employee:Employee
-    # 组织员工状态
-    status:OrganizationEmployeeStatus
-    # 主部门
-    department:Department
-    # 主职务
-    position:Position
-    # 员工职务
-    positions:[EmployeePosition]
-}
+
 
 # 组织员工状态表
 type OrganizationEmployeeStatus{
@@ -198,58 +190,6 @@ type OrganizationEmployeeStatus{
     organization: Organization
 }
 
-# 职位表
-type Position{
-    # 职位
-    id: ID
-    # 职位名称
-    name:String
-    # 职位描述信息
-    description: String
-    # 职位拥有的角色
-    roles: [Role]
-    # 所属部门
-    department: Department
-    # 所属组织
-    organization:Organization
-}
-
-type Department{
-    # 主键id
-    id:ID
-    # 部门简写
-    sn: String
-    # 部门名称
-    name: String
-    # 部门全称 格式如: 销售管理中心.售前支持
-    fullName: String
-    # 部门描述信息
-    description: String
-    # 部门包含的职务
-    jobs: [Job]
-    # 包含所有父级节点的ID
-    path: String
-    # 部门包含的职位
-    positions: [Position]
-    # 排序字段
-    sort: Int
-    # 上级机构
-    parent: Department
-    # 下属部门
-    children: [Department]
-    # 部门员工
-    employees: [Employee]
-    # 组织机构
-    organization: Organization
-    # 所有父级部门的集合
-    parents: [Department]
-    # 部门类型
-    type: DepartmentType
-    #部门属性
-    attributes:[DepartmentAttribute]
-    #是否是主部门
-    isPrimary(employee: ID!): Boolean
-}
 
 #部门属性
 type DepartmentAttribute{
@@ -315,6 +255,16 @@ type EmployeeAddress{
     address:Address
     # 员工
     employee:Employee
+}
+
+type Address{
+    id:ID
+    country:String
+    province:String
+    city:String
+    district:String
+    street:String
+    postalCode:String
 }
 
 # 员工邮箱关联表

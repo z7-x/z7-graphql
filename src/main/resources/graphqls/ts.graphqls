@@ -38,7 +38,7 @@ type Authority{
     # 权限名称
     name:String
     # 权限拥有者
-    userList:[User]
+    userList:[Users]
 }
 
 type Author{
@@ -152,10 +152,10 @@ type People{
     # 生日
     birthday:Date
     # 地址
-    address:Address
+    address:Addresss
 }
 
-type Address{
+type Addresss{
     # 地址主键
     id:ID
     # 家庭电话
