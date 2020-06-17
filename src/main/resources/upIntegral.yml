@@ -1,0 +1,41 @@
+- apiVersion: apps/v1beta1
+  kind: Field
+  metadata:
+    name: Mutation.updatePwd
+  spec:
+    id: "Mutation.updatePwd"
+    name: "updatePwd"
+    kind: Mutation
+    type:
+      repeated: false
+      required: false
+      kind: Boolean
+    deprecated: false
+    defaultValue: null
+    description: "根据id修改密码"
+    delegate: security.default
+    arguments:
+      - id: "id"
+        name: "id"
+        type:
+          repeated: false
+          required: true
+          kind: ID
+        description: "id"
+        defaultValue: null
+      - id: "oldPwd"
+        name: "oldPwd"
+        type:
+          repeated: false
+          required: true
+          kind: String
+        description: "旧密码"
+        defaultValue: null
+      - id: "newPwd"
+        name: "newPwd"
+        type:
+          repeated: false
+          required: true
+          kind: String
+        description: "新密码"
+        defaultValue: null

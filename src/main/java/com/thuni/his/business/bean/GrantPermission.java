@@ -13,7 +13,6 @@ import org.jfantasy.framework.dao.BaseBusEntity;
 import javax.persistence.*;
 
 @Data
-@EqualsAndHashCode(of = {"securityType", "value", "resource", "permission"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

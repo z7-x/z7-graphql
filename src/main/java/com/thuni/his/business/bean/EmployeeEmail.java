@@ -30,7 +30,7 @@ public class EmployeeEmail extends BaseBusEntity {
     @Column(name = "LABEL", length = 30)
     private String label;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EMAIL_ID", foreignKey = @ForeignKey(name = "ORG_EMPLOYEE_EMAIL_VID"), nullable = false, updatable = false)
     private Email email;
 

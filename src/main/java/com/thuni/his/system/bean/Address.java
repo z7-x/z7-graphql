@@ -2,6 +2,7 @@ package com.thuni.his.system.bean;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 import org.jfantasy.framework.dao.BaseBusEntity;
 
 import javax.persistence.*;
@@ -24,7 +25,8 @@ public class Address extends BaseBusEntity {
      */
     @Id
     @Column(name = "id",nullable=false,unique=true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "fantasy-sequence")
+    @GenericGenerator(name = "fantasy-sequence", strategy = "fantasy-sequence")
     private Long id;
     /**
      * 国家

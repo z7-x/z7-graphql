@@ -16,6 +16,136 @@ extend type Mutation {
     deleteOrganization(id:ID!):Boolean
     # 新增/更新 组织类型
     createAndUpdateDepartmentType(input:DepartmentTypeInput):DepartmentType
+    # 新增/更新 员工列表
+    createAndUpdateEmployee(input:EmployeeInput):Employee
+    # 删除 员工列表
+    deleteEmployee(id:ID!):Boolean
+    # 新增/更新 地址信息
+    createAndUpdateAddress(input:AddressesInput):Addresses
+    # 新增/更新 邮箱信息
+    addAndModifyEmail(input:EmailInput):Email
+    # 删除 邮箱信息
+    removeEmail(id:ID!):Boolean
+
+    # 员工-地址 绑定
+    allotEmployeeAndAddress(input:EmployeeAddressInput):EmployeeAddress
+    # 员工-邮箱 绑定
+    allotEmployeeAndEmail(input:EmployeeEmailInput):EmployeeEmail
+}
+
+input EmployeeInput{
+    # 主键id
+    id:ID
+    # 工号
+    jobNumber: String
+    # 标签，用于筛选
+    tags: [String]
+    # 名称
+    name: String
+    # 生日
+    birthday: String
+    # 性别
+    sex: Sex
+}
+
+input UserInput{
+    # 用户编号
+    id:ID
+    # 登录名
+    username:String
+    # 密码
+    password:String
+    # 用户类型
+    userType:UserType
+    # 用户显示昵称
+    nickName:String
+    # 是否启用
+    enabled:Boolean
+    # 未过期
+    accountNonExpired:Boolean
+    # 未锁定
+    accountNonLocked:Boolean
+    # 未失效
+    credentialsNonExpired:Boolean
+    # 锁定时间
+    lockTime:Date
+    # 最后登录时间
+    lastLoginTime:Date
+}
+input EmployeePositionInput{
+    # 是否是主部门
+    primary:Boolean
+
+
+
+}
+
+enum UserType{
+    employee,admin
+}
+
+input EmployeePhoneInput{
+    #标签 查询时用
+    label:String
+    #是否为主电话
+    primary:Boolean
+    #电话
+    phones:PhoneInput
+}
+
+input PhoneInput{
+    # 状态
+    status:PhoneStatus
+    # 电话
+    phone:String
+}
+
+input EmployeeAddressInput{
+    #标签 查询时用
+    label:String
+    #是否为主地址
+    primary:Boolean
+    # 地址
+    addressesId:ID!
+    # 员工
+    employeeId:ID!
+}
+
+input AddressesInput{
+    # 主键id
+    id:ID
+    #国家
+    country:String
+    #省
+    province:String
+    #城市
+    city:String
+    #区
+    district:String
+    #街道
+    street:String
+    #邮编
+    postalCode:String
+}
+
+input EmployeeEmailInput{
+    #标签 查询时用
+    label: String
+    #是否为主邮箱
+    primary: Boolean
+    #邮箱
+    email:EmailInput
+    #员工
+    employee:EmployeeInput
+}
+
+input EmailInput{
+    # 邮箱编号
+    id:ID
+    #邮箱状态
+    status: EmailStatus
+    # 邮箱
+    email:String
 }
 
 input  DepartmentTypeInput{
@@ -157,16 +287,33 @@ type Employee{
     # 链接到的账户
     links:[EmployeeLink]
     # 管理用户
-#    user:User
+    user:User
 }
 
 
 type User {
+    # 用户编号
     id:ID
-    #登录名
+    # 登录名
     username:String
-    #登录密码
+    # 密码
     password:String
+    # 用户类型
+    userType:UserType
+    # 用户显示昵称
+    nickName:String
+    # 是否启用
+    enabled:Boolean
+    # 未过期
+    accountNonExpired:Boolean
+    # 未锁定
+    accountNonLocked:Boolean
+    # 未失效
+    credentialsNonExpired:Boolean
+    # 锁定时间
+    lockTime:Date
+    # 最后登录时间
+    lastLoginTime:Date
 }
 
 # 链接账户
@@ -174,9 +321,6 @@ type EmployeeLink{
     employee:Employee
     linkId:String
 }
-
-
-
 
 # 组织员工状态表
 type OrganizationEmployeeStatus{
@@ -252,12 +396,12 @@ type EmployeeAddress{
     # 标签
     label:String
     # 地址
-    address:Address
+    address:Addresses
     # 员工
     employee:Employee
 }
 
-type Address{
+type Addresses{
     id:ID
     country:String
     province:String

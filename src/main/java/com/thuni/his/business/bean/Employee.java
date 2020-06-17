@@ -25,14 +25,9 @@ import java.util.List;
 public class Employee extends BaseBusEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
     private Long id;
-    /**
-     * 状态
-     */
-    @Transient
-    private String status;
     /**
      * 工号
      */
@@ -104,12 +99,12 @@ public class Employee extends BaseBusEntity {
     /**
      * 链接到的账户
      */
-    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee",cascade = {CascadeType.REMOVE})
     private List<EmployeeLink> links;
 
     /**
      * 管理用户
      */
-    @OneToOne(mappedBy = "employee", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "employee",  cascade = {CascadeType.REMOVE})
     private User user;
 }

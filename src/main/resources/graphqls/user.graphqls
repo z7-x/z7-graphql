@@ -31,10 +31,10 @@ input AuthorityUserInput{
     # 操作权限
     name: String
     # 所属用户
-    userList:[UserInput]
+    userList:[UsersInput]
 }
 
-input UserInput{
+input UsersInput{
     #登录名
     username:String
     #登录密码
