@@ -121,6 +121,9 @@ public class Department extends BaseBusEntity {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "department",cascade = CascadeType.REMOVE)
     private List<DepartmentChangeRecord> records;
 
+    /**
+     * 组织人员
+     */
     @OneToMany(mappedBy = "department",fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
     private List<OrganizationEmployee> organizationEmployees;
 

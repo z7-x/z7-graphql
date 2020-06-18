@@ -22,6 +22,7 @@ import javax.persistence.*;
 public class RoleScope extends BaseBusEntity {
     @Id
     @Column(name = "ID",length = 50)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**

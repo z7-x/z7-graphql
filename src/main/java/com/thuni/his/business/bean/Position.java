@@ -46,13 +46,6 @@ public class Position extends BaseBusEntity {
     @JoinColumn(name = "JOB_ID", foreignKey = @ForeignKey(name = "FK_POSITION_JID"))
     private Job job;
     /**
-     * 职位拥有的角色
-     */
-    @JsonIgnore
-    @ManyToMany(targetEntity = Role.class, fetch = FetchType.LAZY)
-    @JoinTable(name = "AUTH_ROLE_POSITION", joinColumns = @JoinColumn(name = "POSITION_ID", foreignKey = @ForeignKey(name = "FK_AUTH_ROLE_POSITION_PID")), inverseJoinColumns = @JoinColumn(name = "ROLE_CODE"), foreignKey = @ForeignKey(name = "FK_ROLE_POSITION_RID"))
-    private List<Role> roles;
-    /**
      * 所属部门
      */
     @ManyToOne(fetch = FetchType.LAZY)
@@ -64,5 +57,14 @@ public class Position extends BaseBusEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORGANIZATION_ID", foreignKey = @ForeignKey(name = "FK_ORG_POSITION_OID"), updatable = false, nullable = false)
     private Organization organization;
+    /**
+     * 职位拥有的角色
+     */
+    @JsonIgnore
+    @ManyToMany(targetEntity = Role.class, fetch = FetchType.LAZY)
+    @JoinTable(name = "AUTH_ROLE_POSITION",
+            joinColumns = @JoinColumn(name = "POSITION_ID", foreignKey = @ForeignKey(name = "FK_AUTH_ROLE_POSITION_PID")),
+            inverseJoinColumns = @JoinColumn(name = "ROLE_CODE"), foreignKey = @ForeignKey(name = "FK_ROLE_POSITION_RID"))
+    private List<Role> roles;
 
 }

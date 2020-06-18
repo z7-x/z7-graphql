@@ -21,7 +21,7 @@ jpa:
 
 grpc:
   server:
-    port: 6566
+    port: 6577
     address: 0.0.0.0
   client:
     GLOBAL:

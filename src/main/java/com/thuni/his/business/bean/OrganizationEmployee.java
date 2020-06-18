@@ -15,7 +15,7 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- *  组织员工
+ *  组织人员
  */
 @Data
 @Builder

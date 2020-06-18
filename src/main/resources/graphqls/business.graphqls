@@ -26,13 +26,217 @@ extend type Mutation {
     addAndModifyEmail(input:EmailInput):Email
     # 删除 邮箱信息
     removeEmail(id:ID!):Boolean
+    # 新增/修改 电话
+    addMPhone(input:PhoneInput):Phone
+    # 新增/修改 职务
+    addMJob(input:JobInput):Job
+
+    # 新增/修改 角色
+    addMRole(input:RoleInput):Role
+    # 新增/修改 部门
+    addMDepartment(input:DepartmentInput):Department
+    # 新增/修改 职位
+    addMPosition(input:PositionInput):Position
 
     # 员工-地址 绑定
     allotEmployeeAndAddress(input:EmployeeAddressInput):EmployeeAddress
     # 员工-邮箱 绑定
     allotEmployeeAndEmail(input:EmployeeEmailInput):EmployeeEmail
+    # 员工-电话 绑定
+    # 员工-职位 绑定
 }
 
+# 职务
+input JobInput {
+    # 职务
+    id: ID
+    # 职务名称
+    name:String
+    # 职务描述信息
+    description: String
+    # 所属组织
+    organization:ID
+}
+
+input DepartmentInput{
+    # 主键id
+    id:ID
+    # 简写
+    sn:String
+    # 部门名
+    name:String
+    # 路径
+    path:String
+    # 排序字段
+    sort:Int
+    # 描叙信息
+    description:String
+    # 是否启用
+    enabled:Boolean
+    # 部门类型
+    type:ID
+    # 所属部门
+    parent:ID
+    # 部门拥有的角色
+    roles:[ID]
+    # 组织机构
+    organization:ID
+}
+input PositionInput{
+    # 职位编码
+    id:ID
+    # 名称
+    name:String
+    # 职位描述信息
+    description:String
+    # 对应的职务
+    job:ID
+    # 职位拥有的角色
+    roles:[RoleInput]
+    # 所属部门
+    department:ID
+    # 所属组织
+    organization:ID
+}
+input RoleInput{
+    # 编码
+    id: ID
+    # 名称
+    name: String
+    # 是否启用
+    enabled: Boolean
+    # 描述
+    description: String
+    # 角色对应的用户
+    users:[UserInput]
+}
+
+type Position{
+    # 职位编码
+    id:ID
+    # 名称
+    name:String
+    # 职位描述信息
+    description:String
+    # 对应的职务
+    job:Job
+    # 所属部门
+    department:Department
+    # 所属组织
+    organization:Organization
+    # 职位拥有的角色
+    roles:[Role]
+}
+type Department{
+    # 主键id
+    id:ID
+    # 简写
+    sn:String
+    # 部门名
+    name:String
+    # 路径
+    path:String
+    # 排序字段
+    sort:Int
+    # 描叙信息
+    description:String
+    # 是否启用
+    enabled:Boolean
+    # 部门类型
+    type:DepartmentType
+    # 上级部门
+    parent:Department
+    # 下属部门
+    children:[Department]
+    # 本部门成员
+    employees:[EmployeePosition]
+    # 对应的岗位
+    positions:[Position]
+    # 部门拥有的角色
+    roles:[Role]
+    # 组织机构
+    organization:Organization
+    # 链接到的账户
+    links:[DepartmentLink]
+    # 部门属
+    attributes:[DepartmentAttribute]
+    # 部门人员更改记录
+    records:[DepartmentChangeRecord]
+    # 组织人员关联
+    organizationEmployees:[OrganizationEmployee]
+}
+
+# 组织人员关联表
+type OrganizationEmployee{
+    # 主键ID
+    id:ID
+    # 所属组织
+    organization:Organization
+    # 人员
+    employee:Employee
+    # 状态
+    status:OrganizationEmployeeStatus
+    # 主部门
+    department:Department
+    # 主职务
+    position:Position
+    # 岗位
+    positions:[EmployeePosition]
+
+}
+# 部门人员更改记录
+type DepartmentChangeRecord{
+    # 主键ID
+    id:ID
+    # 更改的部门id
+    department:Department
+    # 更改的员工id
+    employee:Employee
+    # 调整年份
+    year:String
+    # 调整组织
+    organization:Organization
+    # 调整状态
+    status:InOrOutStatus
+}
+
+# 调整状态
+enum InOrOutStatus{
+    in,out
+}
+
+# 链接到的账户
+type DepartmentLink{
+    # 主键ID
+    id:ID
+    # 是否为主部门
+    department:Department
+    # 链接类型
+    type:DepartmentLinkType
+    # 账号ID
+    linkId:String
+}
+enum DepartmentLinkType{
+    ezoffice,dingtalk,local
+}
+
+# 员工职位关联表
+type EmployeePosition{
+    # 主键ID
+    id:ID
+    # 是否为主部门
+    primary:Boolean
+    # 员工
+    employee:Employee
+    # 员工所在部门的职位
+    position:Position
+    # 所在部门
+    department:Department
+    # 所属组织
+    organization:Organization
+    # 组织员工
+    status:OrganizationEmployee
+}
 input EmployeeInput{
     # 主键id
     id:ID
@@ -94,6 +298,8 @@ input EmployeePhoneInput{
 }
 
 input PhoneInput{
+    # 电话id
+    id:ID
     # 状态
     status:PhoneStatus
     # 电话
@@ -159,7 +365,7 @@ input  DepartmentTypeInput{
     code:String
     # 最大兼岗人数
     andPost:Int
-    multiSectoral:Boolean
+    multiSectoral:Boolean = false
 }
 
 input OrganizationInput{
@@ -283,7 +489,7 @@ type Employee{
     # 电话列表
     phones:[EmployeePhone]
     # 职位
-#    employeePositions:[EmployeePosition]
+    employeePositions:[EmployeePosition] @deprecated(reason: "暂时在这里不会用到employeePositions与人员关联，后期加上 ")
     # 链接到的账户
     links:[EmployeeLink]
     # 管理用户
@@ -337,6 +543,10 @@ type OrganizationEmployeeStatus{
 
 #部门属性
 type DepartmentAttribute{
+    # 编号
+    id:ID
+    # 所属部门
+    department:Department
     #属性名
     attributeName:String
     #属性值
@@ -373,6 +583,8 @@ type Job {
     name:String
     # 职务描述信息
     description: String
+    # 所属组织
+    organization:Organization
 }
 
 # 角色表
@@ -385,8 +597,9 @@ type Role{
     enabled: Boolean
     # 描述
     description: String
+    # 角色对应的用户
+    users:[User]
 }
-
 # 员工地址关联表
 type EmployeeAddress{
     # 编号

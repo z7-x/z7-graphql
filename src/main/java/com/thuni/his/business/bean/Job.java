@@ -1,6 +1,10 @@
 package com.thuni.his.business.bean;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.thuni.his.business.bean.databind.OrgDeserializer;
+import com.thuni.his.business.bean.databind.OrgSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,6 +42,8 @@ public class Job extends BaseBusEntity {
     /**
      * 职务所属组织
      */
+    @JsonSerialize(using = OrgSerializer.class)
+    @JsonDeserialize(using = OrgDeserializer.class)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORGANIZATION_ID", foreignKey = @ForeignKey(name = "FK_ORG_JOB_OID"), updatable = false, nullable = false)
     private Organization organization;

@@ -1,3 +1,4 @@
+directive @auth(requires: String) on OBJECT | FIELD_DEFINITION
 directive @dateFormat on FIELD_DEFINITION
 directive @dict on FIELD_DEFINITION
 directive @fileObjectFormat on FIELD_DEFINITION
