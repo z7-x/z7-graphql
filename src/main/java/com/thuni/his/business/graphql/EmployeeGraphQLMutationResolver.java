@@ -34,7 +34,11 @@ public class EmployeeGraphQLMutationResolver implements GraphQLMutationResolver 
     @Autowired
     private PhoneService phoneService;
     @Autowired
+    private UserService userService;
+    @Autowired
     private JobService jobService;
+    @Autowired
+    private RoleService roleService;
 
     public Employee createAndUpdateEmployee(Employee employee){
         return employeeService.createAndUpdateEmployee(employee);
@@ -79,7 +83,11 @@ public class EmployeeGraphQLMutationResolver implements GraphQLMutationResolver 
         return null;
     }
 
+    public User createAndUpdateUser(User user){
+        return userService.createAndUpdateUser(user);
+    }
+
     public Role addMRole(Role role){
-        return null;
+        return roleService.addMRole(role);
     }
 }

@@ -30,7 +30,8 @@ extend type Mutation {
     addMPhone(input:PhoneInput):Phone
     # 新增/修改 职务
     addMJob(input:JobInput):Job
-
+    # 新增/修改 用户
+    createAndUpdateUser(input:UserInput):User
     # 新增/修改 角色
     addMRole(input:RoleInput):Role
     # 新增/修改 部门
@@ -279,9 +280,6 @@ input UserInput{
 input EmployeePositionInput{
     # 是否是主部门
     primary:Boolean
-
-
-
 }
 
 enum UserType{

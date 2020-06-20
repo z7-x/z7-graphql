@@ -3,7 +3,7 @@ package com.thuni.his.demo.service;
 import com.thuni.his.demo.bean.Authority;
 import com.thuni.his.demo.bean.Users;
 import com.thuni.his.demo.dao.AuthorityDao;
-import com.thuni.his.demo.dao.UserDao;
+import com.thuni.his.demo.dao.UsersDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ public class AuthorityService {
     @Autowired
     private AuthorityDao authorityDao;
     @Autowired
-    private UserDao userDao;
+    private UsersDao usersDao;
 
     /**
      * 保存权限
@@ -36,7 +36,7 @@ public class AuthorityService {
      */
     public Authority saveAuthorityUser(Authority authority){
         Authority save = authorityDao.save(authority);
-        List<Users> userList = userDao.saveAll(save.getUserList());
+        List<Users> userList = usersDao.saveAll(save.getUserList());
         save.setUserList(userList);
         return save;
     }

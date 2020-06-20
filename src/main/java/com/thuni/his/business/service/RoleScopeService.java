@@ -2,11 +2,9 @@ package com.thuni.his.business.service;
 
 import com.thuni.his.business.bean.RoleScope;
 import com.thuni.his.business.dao.RoleScopeDao;
-import com.thuni.his.business.graphql.inputs.RoleScopeFilter;
 import org.jfantasy.framework.dao.Pager;
 import org.jfantasy.framework.dao.jpa.PropertyFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
