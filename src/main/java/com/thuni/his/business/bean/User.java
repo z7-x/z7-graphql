@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.thuni.his.business.bean.databind.EmployeeDeserializer;
+import com.thuni.his.business.bean.databind.OrgDeserializer;
 import com.thuni.his.business.bean.databind.RolesDeserializer;
 import com.thuni.his.business.bean.enums.UserType;
 import lombok.*;
@@ -107,6 +109,7 @@ public class User extends BaseBusEntity {
      * 管理人员
      */
     @OneToOne(fetch = FetchType.LAZY)
+    @JsonDeserialize(using = EmployeeDeserializer.class)
     @JoinColumn(name = "EMPLOYEE_ID", foreignKey = @ForeignKey(name = "FK_AUTH_USER_EMPLOYEE"))
     private Employee employee;
 
@@ -114,6 +117,7 @@ public class User extends BaseBusEntity {
      * 所属组织
      */
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonDeserialize(using = OrgDeserializer.class)
     @JoinColumn(name = "ORGANIZATION_ID", foreignKey = @ForeignKey(name = "FK_USER_ORGANIZATION"), updatable = false, nullable = false)
     private Organization organization;
 
