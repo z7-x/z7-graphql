@@ -87,7 +87,7 @@ public class EmployeeGraphQLMutationResolver implements GraphQLMutationResolver 
         return userService.createAndUpdateUser(user);
     }
 
-    public Role addMRole(Role role){
+    public Role createAndUpdateRole(Role role){
         return roleService.addMRole(role);
     }
 }
