@@ -1,4 +1,4 @@
-package com.thuni.his.demo.tools;
+package com.thuni.his.tools;
 
 
 import org.apache.log4j.Logger;

@@ -19,6 +19,7 @@ import org.jfantasy.framework.util.common.ClassUtil;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.*;
 
 /**
@@ -42,7 +43,8 @@ public class User extends BaseBusEntity {
     /**
      * 用户登录名称
      */
-    @NotEmpty(groups = {RESTful.POST.class, RESTful.PUT.class})
+    @Size(min=3, max=20)
+    @NotEmpty(message = "账号不能为空",groups = {RESTful.POST.class, RESTful.PUT.class})
     @Length(min = 6, max = 20, groups = {RESTful.POST.class, RESTful.PUT.class})
     @Column(name = "USERNAME", length = 20, updatable = false, nullable = false, unique = true)
     private String username;
@@ -97,6 +99,14 @@ public class User extends BaseBusEntity {
     /**
      * 用户对应的角色
      */
+    //1、关系维护端，负责多对多关系的绑定和解除
+    //2、@JoinTable注解的name属性指定关联表的名字，joinColumns指定外键的名字，关联到关系维护端(User)
+    //3、inverseJoinColumns指定外键的名字，要关联的关系被维护端(Role)
+    //4、其实可以不使用@JoinTable注解，默认生成的关联表名称为主表表名+下划线+从表表名，
+    //即表名为 AUTH_ROLE_USER
+    //关联到主表的外键名：主表名+下划线+主表中的主键列名,即 USER_ID
+    //关联到从表的外键名：主表中用于关联的属性名+下划线+从表的主键列名,即 ROLE_CODE
+    //主表就是关系维护端对应的表，从表就是关系被维护端对应的表
     @JsonDeserialize(using = RolesDeserializer.class)
     @ManyToMany(targetEntity = Role.class, fetch = FetchType.LAZY)
     @JoinTable(name = "AUTH_ROLE_USER",

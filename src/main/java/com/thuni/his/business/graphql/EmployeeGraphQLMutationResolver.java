@@ -4,14 +4,20 @@ import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.thuni.his.business.bean.*;
 import com.thuni.his.business.graphql.converters.EmployeeAddressConverter;
 import com.thuni.his.business.graphql.converters.EmployeeEmailConverter;
+import com.thuni.his.business.graphql.converters.RolesConverter;
 import com.thuni.his.business.graphql.inputs.EmployeeAddressInput;
 import com.thuni.his.business.graphql.inputs.EmployeeEmailInput;
+import com.thuni.his.business.graphql.inputs.RolesInput;
 import com.thuni.his.business.service.*;
 import com.thuni.his.system.bean.Address;
 import com.thuni.his.system.bean.Email;
 import com.thuni.his.system.bean.Phone;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Component
@@ -39,6 +45,8 @@ public class EmployeeGraphQLMutationResolver implements GraphQLMutationResolver 
     private JobService jobService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private RolesConverter rolesConverter;
 
     public Employee createAndUpdateEmployee(Employee employee){
         return employeeService.createAndUpdateEmployee(employee);
@@ -87,7 +95,7 @@ public class EmployeeGraphQLMutationResolver implements GraphQLMutationResolver 
         return userService.createAndUpdateUser(user);
     }
 
-    public Role createAndUpdateRole(Role role){
-        return roleService.addMRole(role);
+    public Role createAndUpdateRole(RolesInput input) {
+        return roleService.createAndUpdateRole(rolesConverter.toRole(input));
     }
 }

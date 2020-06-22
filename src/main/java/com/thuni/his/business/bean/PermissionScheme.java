@@ -35,6 +35,8 @@ public class PermissionScheme extends BaseBusEntity {
     /**
      * 描述
      */
+    @Lob  // 大对象，映射 MySQL 的 Long Text 类型
+    @Basic(fetch = FetchType.LAZY) // 懒加载
     @Column(name = "DESCRIPTION", length = 50)
     private String description;
     /**

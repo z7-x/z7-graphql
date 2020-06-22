@@ -2,13 +2,10 @@ package com.thuni.his.business.graphql.converters;
 
 import com.thuni.his.business.bean.EmployeeAddress;
 import com.thuni.his.business.graphql.inputs.EmployeeAddressInput;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring",unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring",unmappedTargetPolicy = ReportingPolicy.IGNORE,nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface EmployeeAddressConverter {
     EmployeeAddressConverter INSTANCE = Mappers.getMapper(EmployeeAddressConverter.class);
 

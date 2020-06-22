@@ -33,7 +33,7 @@ extend type Mutation {
     # 新增/修改 用户
     createAndUpdateUser(input:UserInput):User
     # 新增/修改 角色
-    createAndUpdateRole(input:RoleInput):Role
+    createAndUpdateRole(input:RolesInput):Role
     # 新增/修改 部门
     addMDepartment(input:DepartmentInput):Department
     # 新增/修改 职位
@@ -93,13 +93,14 @@ input PositionInput{
     # 对应的职务
     job:ID
     # 职位拥有的角色
-    roles:[RoleInput]
+    roles:[ID]
     # 所属部门
     department:ID
     # 所属组织
     organization:ID
 }
-input RoleInput{
+
+input RolesInput{
     # 角色编号
     id: ID
     # 角色名称
@@ -614,6 +615,7 @@ type Role{
     # 角色对应的用户
     users:[User]
 }
+
 # 员工地址关联表
 type EmployeeAddress{
     # 编号

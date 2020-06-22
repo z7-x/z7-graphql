@@ -54,6 +54,8 @@ public class Department extends BaseBusEntity {
     /**
      * 描述信息
      */
+    @Lob  // 大对象，映射 MySQL 的 Long Text 类型
+    @Basic(fetch = FetchType.LAZY) // 懒加载
     @Column(name = "DESCRIPTION", length = 150)
     private String description;
     /**

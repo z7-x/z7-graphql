@@ -3,10 +3,11 @@ package com.thuni.his.business.graphql.converters;
 import com.thuni.his.business.bean.EmployeeEmail;
 import com.thuni.his.business.graphql.inputs.EmployeeEmailInput;
 import org.mapstruct.Mapper;
+import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring",unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring",unmappedTargetPolicy = ReportingPolicy.IGNORE,nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface EmployeeEmailConverter {
     EmployeeEmailConverter INSTANCE = Mappers.getMapper(EmployeeEmailConverter.class);
 
