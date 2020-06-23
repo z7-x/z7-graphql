@@ -5,20 +5,17 @@ import com.thuni.his.business.bean.*;
 import com.thuni.his.business.graphql.converters.EmployeeAddressConverter;
 import com.thuni.his.business.graphql.converters.EmployeeEmailConverter;
 import com.thuni.his.business.graphql.converters.RolesConverter;
+import com.thuni.his.business.graphql.converters.UserConverter;
 import com.thuni.his.business.graphql.inputs.EmployeeAddressInput;
 import com.thuni.his.business.graphql.inputs.EmployeeEmailInput;
 import com.thuni.his.business.graphql.inputs.RolesInput;
+import com.thuni.his.business.graphql.inputs.UserInput;
 import com.thuni.his.business.service.*;
 import com.thuni.his.system.bean.Address;
 import com.thuni.his.system.bean.Email;
 import com.thuni.his.system.bean.Phone;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 @Component
 public class EmployeeGraphQLMutationResolver implements GraphQLMutationResolver {
@@ -47,6 +44,8 @@ public class EmployeeGraphQLMutationResolver implements GraphQLMutationResolver 
     private RoleService roleService;
     @Autowired
     private RolesConverter rolesConverter;
+    @Autowired
+    private UserConverter userConverter;
 
     public Employee createAndUpdateEmployee(Employee employee){
         return employeeService.createAndUpdateEmployee(employee);
@@ -91,11 +90,22 @@ public class EmployeeGraphQLMutationResolver implements GraphQLMutationResolver 
         return null;
     }
 
-    public User createAndUpdateUser(User user){
-        return userService.createAndUpdateUser(user);
-    }
-
+    /**
+     * 关系:多对多 不创建bean实体
+     * 新增/修改 角色信息的同时将角色信息绑定到用户
+     * @param input
+     * @return
+     */
     public Role createAndUpdateRole(RolesInput input) {
         return roleService.createAndUpdateRole(rolesConverter.toRole(input));
+    }
+    /**
+     * 关系:多对多 不创建bean实体
+     * 新增/修改 用户信息的同时将用户信息绑定到角色
+     * @param input
+     * @return
+     */
+    public User createAndUpdateUser(UserInput input) {
+        return userService.createAndUpdateUser(userConverter.toUser(input));
     }
 }

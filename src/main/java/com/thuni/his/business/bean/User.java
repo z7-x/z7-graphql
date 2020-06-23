@@ -32,7 +32,7 @@ import java.util.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "AUTH_USER")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "user_groups", "website", "menus", "authorities"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","id"})//指定的字段不会序列化和反序列化
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User extends BaseBusEntity {
     @Id
@@ -112,7 +112,6 @@ public class User extends BaseBusEntity {
     @JoinTable(name = "AUTH_ROLE_USER",
             joinColumns = @JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "FK_AUTH_ROLE_USER_USER")),
             inverseJoinColumns = @JoinColumn(name = "ROLE_CODE"), foreignKey = @ForeignKey(name = "FK_ROLE_USER_UID"))
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private List<Role> roles;
 
     /**

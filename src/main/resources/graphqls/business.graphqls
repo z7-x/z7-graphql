@@ -30,10 +30,12 @@ extend type Mutation {
     addMPhone(input:PhoneInput):Phone
     # 新增/修改 职务
     addMJob(input:JobInput):Job
-    # 新增/修改 用户
+
+    # 新增/修改 用户信息的同时批量分配角色
     createAndUpdateUser(input:UserInput):User
-    # 新增/修改 角色
+    # 新增/修改 角色信息的同时批量分配用户
     createAndUpdateRole(input:RolesInput):Role
+
     # 新增/修改 部门
     addMDepartment(input:DepartmentInput):Department
     # 新增/修改 职位
@@ -274,9 +276,9 @@ input UserInput{
     # 是否启用
     enabled:Boolean
     # 用户对应员工
-    employee:ID
+    employeeId:ID
     # 所属组织
-    organization:ID
+    organizationId:ID
     # 未过期
     accountNonExpired:Boolean
     # 未锁定
@@ -287,6 +289,8 @@ input UserInput{
     lockTime:Date
     # 最后登录时间
     lastLoginTime:Date
+    # 权限
+    roleIds:[ID]
 }
 input EmployeePositionInput{
     # 是否是主部门
@@ -529,6 +533,12 @@ type User {
     lockTime:Date
     # 最后登录时间
     lastLoginTime:Date
+    # 人员列表
+    employee:Employee
+    # 所属组织
+    organization:Organization
+    # 拥有权限
+    roles:[Role]
 }
 
 # 链接账户
