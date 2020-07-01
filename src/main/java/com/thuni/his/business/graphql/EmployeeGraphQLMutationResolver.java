@@ -2,14 +2,8 @@ package com.thuni.his.business.graphql;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.thuni.his.business.bean.*;
-import com.thuni.his.business.graphql.converters.EmployeeAddressConverter;
-import com.thuni.his.business.graphql.converters.EmployeeEmailConverter;
-import com.thuni.his.business.graphql.converters.RolesConverter;
-import com.thuni.his.business.graphql.converters.UserConverter;
-import com.thuni.his.business.graphql.inputs.EmployeeAddressInput;
-import com.thuni.his.business.graphql.inputs.EmployeeEmailInput;
-import com.thuni.his.business.graphql.inputs.RolesInput;
-import com.thuni.his.business.graphql.inputs.UserInput;
+import com.thuni.his.business.graphql.converters.*;
+import com.thuni.his.business.graphql.inputs.*;
 import com.thuni.his.business.service.*;
 import com.thuni.his.system.bean.Address;
 import com.thuni.his.system.bean.Email;
@@ -46,6 +40,10 @@ public class EmployeeGraphQLMutationResolver implements GraphQLMutationResolver 
     private RolesConverter rolesConverter;
     @Autowired
     private UserConverter userConverter;
+    @Autowired
+    private DepartmentService departmentService;
+    @Autowired
+    private DepartmentConverter departmentConverter;
 
     public Employee createAndUpdateEmployee(Employee employee){
         return employeeService.createAndUpdateEmployee(employee);
@@ -82,11 +80,18 @@ public class EmployeeGraphQLMutationResolver implements GraphQLMutationResolver 
         return jobService.addMJob(job);
     }
 
-    public Position addMPosition(Position position){
+    public Position addAndModifyPosition(Position position){
         return null;
     }
 
-    public Department addMDepartment(Department department){
+    /**
+     * 关系:多对多 不创建bean实体
+     * 新增/修改 部门-部门角色-部门类型
+     * @param input
+     * @return
+     */
+    public Department addAndModifyDepartment(DepartmentInput input){
+//        return departmentService.addAndModifyDepartment(departmentConverter);
         return null;
     }
 

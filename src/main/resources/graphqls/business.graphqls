@@ -32,14 +32,14 @@ extend type Mutation {
     addMJob(input:JobInput):Job
 
     # 新增/修改 用户信息的同时批量分配角色
-    createAndUpdateUser(input:UserInput):User
+    createAndUpdateUser(input:UserInput):User @deprecated(reason: "@ManyToMany: 没有新建bean实体,在创建User实体的同时通过jpa自动建表在数据库中创建了中间表")
     # 新增/修改 角色信息的同时批量分配用户
-    createAndUpdateRole(input:RolesInput):Role
+    createAndUpdateRole(input:RolesInput):Role @deprecated(reason: "@ManyToMany: 没有新建bean实体,在创建User实体的同时通过jpa自动建表在数据库中创建了中间表")
 
     # 新增/修改 部门
-    addMDepartment(input:DepartmentInput):Department
+    addAndModifyDepartment(input:DepartmentInput):Department
     # 新增/修改 职位
-    addMPosition(input:PositionInput):Position
+    addAndModifyPosition(input:PositionInput):Position
 
     # 员工-地址 绑定
     allotEmployeeAndAddress(input:EmployeeAddressInput):EmployeeAddress
@@ -77,9 +77,11 @@ input DepartmentInput{
     # 是否启用
     enabled:Boolean
     # 部门类型
-    type:ID
-    # 所属部门
+    type:DepartmentTypeInput
+    # 父级部门id
     parent:ID
+    # 子级部门id
+    children:[ID]
     # 部门拥有的角色
     roles:[ID]
     # 组织机构
@@ -373,7 +375,7 @@ input  DepartmentTypeInput{
     # 名称
     name:String
     # 组织
-    organization:OrganizationInput
+    organization:ID
     # 编码
     code:String
     # 最大兼岗人数
@@ -502,7 +504,7 @@ type Employee{
     # 电话列表
     phones:[EmployeePhone]
     # 职位
-    employeePositions:[EmployeePosition] @deprecated(reason: "暂时在这里不会用到employeePositions与人员关联，后期加上 ")
+    employeePositions:[EmployeePosition]
     # 链接到的账户
     links:[EmployeeLink]
     # 管理用户

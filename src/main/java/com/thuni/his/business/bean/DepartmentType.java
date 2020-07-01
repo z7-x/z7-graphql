@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 /**
- * 组织类型
+ * 部门类型
  */
 @Data
 @Builder
