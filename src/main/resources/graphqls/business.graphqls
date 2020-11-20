@@ -77,7 +77,7 @@ input DepartmentInput{
     # 是否启用
     enabled:Boolean
     # 部门类型
-    type:DepartmentTypeInput
+    type:ID
     # 父级部门id
     parent:ID
     # 子级部门id

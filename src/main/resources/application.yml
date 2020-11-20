@@ -74,9 +74,8 @@ logging:
   file:
     path: ~/logs
 
-mybatis:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  mapper-locations: classpath*:mapper/*.xml
-  type-aliases-package: com.thuni.his.mybatis.pojo
+## 引入mybatis
+#mybatis:
+#  mapper-locations: classpath*:mapper/*.xml
+#  type-aliases-package: com.thuni.his.mybatis.pojo
 

@@ -1,12 +1,12 @@
-buildscript {
-    repositories {
-        maven { url "https://artifactory.thuni-h.com/artifactory/libs-release" }
-        maven { url "https://maven.aliyun.com/repository/central" }
-        maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
-        mavenCentral()
-        mavenLocal()
-    }
-}
+//buildscript {
+//    repositories {
+//        maven { url "https://artifactory.thuni-h.com/artifactory/libs-release" }
+//        maven { url "https://maven.aliyun.com/repository/central" }
+//        maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
+//        mavenCentral()
+//        mavenLocal()
+//    }
+//}
 
 plugins {
     id 'idea'
@@ -23,6 +23,8 @@ version = System.getenv()['CI_BUILD_TAG']
 status = 'integration'
 
 repositories {
+//    maven { url "https://maven.aliyun.com/repository/central" }
+//    maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
     maven { url "https://artifactory.thuni-h.com/artifactory/libs-release" }
 }
 
@@ -111,7 +113,7 @@ dependencyManagement {
 
 dependencies {
     compile group: 'javax.interceptor', name: 'javax.interceptor-api', version: '1.2'
-    compile 'org.mybatis:mybatis:3.4.0'
+//    compile 'tk.mybatis:mapper:4.1.5'
     compile 'log4j:log4j:1.2.17'
     compile 'org.apache.poi:poi:3.17'
     compile 'org.apache.poi:poi-ooxml:3.17'

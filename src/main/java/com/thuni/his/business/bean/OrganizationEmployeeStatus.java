@@ -40,7 +40,6 @@ public class OrganizationEmployeeStatus extends BaseBusEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORGANIZATION_ID", foreignKey = @ForeignKey(name = "FK_ORGANIZATION_EMPLOYEE_STATUS_OID"), updatable = false, nullable = false)
     private Organization organization;
-
     /**
      *编码
      */

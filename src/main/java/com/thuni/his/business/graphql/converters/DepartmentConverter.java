@@ -17,7 +17,7 @@ public interface DepartmentConverter {
     @Mappings({
             @Mapping(source = "longs", target = "roles", qualifiedByName = "toRoles"),
             @Mapping(source = "organization", target = "organization.id"),
-            @Mapping(source = "type", target = "type", qualifiedByName = "toDepartmentType"),
+            @Mapping(source = "type", target = "type.id", qualifiedByName = "toDepartmentType"),
     })
     Department toDepartment(DepartmentInput input);
 
